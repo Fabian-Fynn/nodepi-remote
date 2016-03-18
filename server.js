@@ -4,10 +4,10 @@ var http = require('http').Server(app);
 var path = require('path');
 var jsonfile = require('jsonfile');
 var stateFile = 'data.json';
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 
-var jsonParser = bodyParser.json()
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(express.static('public'));
 app.get('/', function(req, res) {

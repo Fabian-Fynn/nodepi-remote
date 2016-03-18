@@ -12,6 +12,8 @@ function render() {
     $('#properties').append('<div class="property" id="' + key +'">');
     $('#' + key).append('<input class="key" type="text" disabled="true" value="' + key + '">');
     $('#' + key).append('<input class="value" type="text" value="' + data[key] + '">');
+    $('#' + key).append('<button class="false"> 0 </button>');
+    $('#' + key).append('<button class="true"> 1 </button>');
     $('#' + key).append('<button class="remove-btn"> X </button>');
   };
 
@@ -24,6 +26,10 @@ function render() {
   $('.remove-btn').click(function(e){
     removeProperty(e.target.parentElement.id);
   });
+
+  $('.false, .true').click(function(e){
+    $('#' + e.target.parentElement.id + ' .value').val(e.target.className);
+  });
 }
 
 function addProperty() {
@@ -35,7 +41,17 @@ function addProperty() {
     $('#properties').append('<div class="property" id="new-property">');
     $('#new-property').append('<input class="key" type="text" value="" placeholder="key">');
     $('#new-property').append('<input class="value" type="text" placeholder="value">');
+    $('#new-property').append('<button class="false"> 0 </button>');
+    $('#new-property').append('<button class="true"> 1 </button>');
     $('#new-property').append('<button class="remove-btn"> X </button>');
+
+    $('.remove-btn').click(function(e){
+      removeProperty(e.target.parentElement.id);
+    });
+
+    $('.false, .true').click(function(e){
+      $('#' + e.target.parentElement.id + ' .value').val(e.target.className);
+    });
   }
 }
 
@@ -64,6 +80,18 @@ function saveProperties() {
       if( value === '' || value === undefined) {
         value = null;
       }
+
+      if( typeof value === string) {
+        value = value.toLowerCase();
+      }
+
+      if( value === 'true' ) {
+        value = true;
+      } else if (value === 'false') {
+        value = false;
+      }
+
+      key = key.toLowerCase();
       newData[key] = value;
     }
   });
