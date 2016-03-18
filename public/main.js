@@ -81,7 +81,7 @@ function saveProperties() {
         value = null;
       }
 
-      if( typeof value === string) {
+      if( typeof value === 'string') {
         value = value.toLowerCase();
       }
 
@@ -91,7 +91,10 @@ function saveProperties() {
         value = false;
       }
 
-      key = key.toLowerCase();
+      if( typeof key === 'string') {
+        key = key.toLowerCase();
+      }
+
       newData[key] = value;
     }
   });
