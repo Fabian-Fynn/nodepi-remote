@@ -5,6 +5,18 @@ body {
   text-align: center;
 }
 
+.toggle {
+  width: 100%;
+}
+
+.toggle button{
+  float: none;
+  font-size: 150%;
+  height: auto;
+  width: 250px;
+  margin-bottom: 10px;
+}
+
 #properties {
   width: 100%;
   margin-bottom: 20px;
@@ -16,7 +28,12 @@ body {
 
 .property {
   height: 44px;
+  float: none;
   display: inline-flex;
+}
+
+#properties.index .property {
+  display: block;
 }
 
 button {
