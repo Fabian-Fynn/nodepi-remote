@@ -133,7 +133,7 @@ function requestData(token){
 
 (function(){
   var token = getParameterByName('auth-key');
-  var tokenQuery;
+  var tokenQuery = '';
 
   if(token !== null) {
     tokenQuery = '?auth-key=' + token;
