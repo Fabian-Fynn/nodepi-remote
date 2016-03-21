@@ -102,7 +102,18 @@ function showAlert(type, msg){
   }
 }
 
-(function(){
+function getParameterByName(name) {
+  var url = window.location.href;
+  url = url.toLowerCase();
+  name = name.replace(/[\[\]]/g, "\\$&").toLowerCase();
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function requestData(token){
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function() {
@@ -116,9 +127,19 @@ function showAlert(type, msg){
     }
   };
 
-  xhttp.open("GET", "/API/data", true);
+  xhttp.open("GET", "/API/data?auth-key=" + token, true);
   xhttp.send();
+}
 
-  $('.menu').append('<ul><a href="/"><li>NodePi</li></a><a href="/set"><li>Set Properties</li></a></ul>');
+(function(){
+  var token = getParameterByName('auth-key');
+  var tokenQuery;
+
+  if(token !== null) {
+    tokenQuery = '?auth-key=' + token;
+    requestData(token);
+  }
+
+  $('.menu').append('<ul><a href="/' + tokenQuery + '"><li>NodePi</li></a><a href="/remote' + tokenQuery + '"><li>Remote Control</li></a><a href="/set' + tokenQuery + '"><li>Set Properties</li></a></ul>');
 })();
 
