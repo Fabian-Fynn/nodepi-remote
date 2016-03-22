@@ -36,6 +36,7 @@ function removeProperty(key) {
 }
 
 function saveProperties() {
+  var token = getParameterByName('auth-key');
   var newData = {};
   $('.property').each(function(index){
     var key, value;
@@ -75,7 +76,7 @@ function saveProperties() {
 
   $.ajax({
     type: "POST",
-    url: "/API/set",
+    url: "/API/set?auth-key=" + token,
     // The key needs to match your method's input parameter (case-sensitive).
    data: JSON.stringify(data),
    contentType: "application/json; charset=utf-8",
