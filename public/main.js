@@ -141,6 +141,6 @@ function requestData(token){
     requestData(token);
   }
 
-  $('.menu').append('<ul><a href="/' + tokenQuery + '"><li>NodePi</li></a><a href="/remote' + tokenQuery + '"><li>Remote Control</li></a><a href="/set' + tokenQuery + '"><li>Set Properties</li></a></ul>');
+  $('.menu').append('<a href="/' + tokenQuery + '"><div class="logo"></div></a><ul><a href="/remote' + tokenQuery + '"><li>Remote Control</li></a><a href="/set' + tokenQuery + '"><li>Set Properties</li></a></ul>');
 })();
 
