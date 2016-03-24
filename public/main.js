@@ -86,6 +86,12 @@ function saveProperties() {
    },
    failure: function(errMsg) {
      showAlert('error', errMsg);
+   },
+   error: function(err) {
+    showAlert('error', err.responseText);
+     setTimeout(function(){
+      location.reload();
+     }, 2000);
    }
  });
 }
@@ -138,9 +144,10 @@ function requestData(token){
 
   if(token !== null) {
     tokenQuery = '?auth-key=' + token;
-    requestData(token);
   }
 
-  $('.menu').append('<a href="/' + tokenQuery + '"><div class="logo"></div></a><ul><a href="/remote' + tokenQuery + '"><li>Remote Control</li></a><a href="/set' + tokenQuery + '"><li>Set Properties</li></a></ul>');
+  requestData(token);
+
+  $('.menu').append('<a href="/' + tokenQuery + '"><div class="logo"></div></a><ul><a href="/guest-remote' + tokenQuery + '"><li>Guest Remote</li></a><a href="/remote' + tokenQuery + '"><li>Remote Control</li></a><a href="/set' + tokenQuery + '"><li>Set Properties</li></a></ul>');
 })();
 

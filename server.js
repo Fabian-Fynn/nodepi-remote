@@ -21,7 +21,10 @@ app.get('/remote', function(req, res) {
   } else {
     res.sendFile(path.join(__dirname + '/public/unauthorized.html'));
   }
+});
 
+app.get('/guest-remote', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/guest-remote.html'));
 });
 
 app.get('/set', function(req, res) {
@@ -35,26 +38,55 @@ app.get('/set', function(req, res) {
 app.get('/API/data', function(req, res) {
   if(authenticated(req.query['auth-key'])) {
     jsonfile.readFile(stateFile, function(err, obj) {
-        res.send(obj);
+      res.send(obj.properties);
     });
   } else {
-    res.sendFile(path.join(__dirname + '/public/unauthorized.html'));
+    jsonfile.readFile(stateFile, function(err, obj) {
+      var properties = obj.properties;
+      var guestProperties = obj.guestProperties;
+      var approvedProperties = {'accessDenied': true};
+
+      if(properties.allowguest === true) {
+        approvedProperties = filterProperties(properties, guestProperties);
+      }
+      res.send(approvedProperties);
+    });
   }
 });
 
 app.post('/API/set', jsonParser, function(req, res) {
   if(authenticated(req.query['auth-key'])) {
-    jsonfile.writeFile(stateFile, req.body, function(err) {
-      if(err) {
-        console.log(err);
-      } else {
-        res.send(req.body);
-      }
+    jsonfile.readFile(stateFile, function(err, obj) {
+      obj.properties = req.body;
+
+      jsonfile.writeFile(stateFile, obj, function(err) {
+        if(err) {
+          console.log(err);
+        } else {
+          res.send(obj);
+        }
+      });
     });
   } else {
-    res.sendFile(path.join(__dirname + '/public/unauthorized.html'));
-  }
+      jsonfile.readFile(stateFile, function(err, obj) {
+        if(obj.properties.allowguest === true) {
+          for(var i = 0; i < obj.guestProperties.length; i++){
+            var key = obj.guestProperties[i];
+            obj.properties[key] = req.body[key];
+          }
 
+          jsonfile.writeFile(stateFile, obj, function(err) {
+            if(err) {
+              console.log(err);
+            } else {
+              res.send(obj);
+            }
+          });
+      } else {
+        res.status(423).send('Guest access was deactivated!');
+      }
+    });
+  }
 });
 
 function authenticated(token) {
@@ -62,6 +94,17 @@ function authenticated(token) {
     return true;
   }
     return false;
+}
+
+function filterProperties(properties, guestProperties) {
+  var result = {};
+  for(var i = 0; i < guestProperties.length; i++) {
+    var key = guestProperties[i];
+    if(hasOwnProperty.call(properties, key)) {
+      result[key] = properties[key];
+    }
+  }
+  return result;
 }
 
 http.listen(9900, function() {
