@@ -30,6 +30,7 @@ body {
 
 .property {
   height: 44px;
+  width: 55%;
   float: none;
   display: inline-flex;
 }

@@ -38,7 +38,11 @@ app.get('/set', function(req, res) {
 app.get('/API/data', function(req, res) {
   if(authenticated(req.query['auth-key'])) {
     jsonfile.readFile(stateFile, function(err, obj) {
-      res.send(obj.properties);
+      if(err){
+        console.log(err);
+      } else {
+        res.send(obj.properties);
+      }
     });
   } else {
     jsonfile.readFile(stateFile, function(err, obj) {

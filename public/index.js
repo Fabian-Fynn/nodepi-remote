@@ -52,3 +52,14 @@ function render() {
     saveProperties();
   });
 }
+
+function updateColor(jscolor) {
+  var i = 0;
+  var len = jscolor.rgb.length;
+  while(i < len){
+    jscolor.rgb[i] = Math.floor(jscolor.rgb[i]);
+    i++;
+  }
+  $('#led .value').val(jscolor.rgb.toString());
+  saveProperties();
+}
