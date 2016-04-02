@@ -61,15 +61,19 @@ app.get('/API/data', function(req, res) {
 app.post('/API/set', jsonParser, function(req, res) {
   if(authenticated(req.query['auth-key'])) {
     jsonfile.readFile(stateFile, function(err, obj) {
-      obj.properties = req.body;
+      if(err) {
+        console.log(err);
+      } else {
+        obj.properties = req.body;
 
-      jsonfile.writeFile(stateFile, obj, function(err) {
-        if(err) {
-          console.log(err);
-        } else {
-          res.send(obj);
-        }
-      });
+        jsonfile.writeFile(stateFile, obj, function(err) {
+          if(err) {
+            console.log(err);
+          } else {
+            res.send(obj);
+          }
+        });
+      }
     });
   } else {
       jsonfile.readFile(stateFile, function(err, obj) {
