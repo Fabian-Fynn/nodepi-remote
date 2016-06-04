@@ -26,8 +26,9 @@
     <script src="index.js"></script>
     <script>
       (() => {
-        window.cw = Raphael.colorwheel($("#colorwheel"),350);
-        //cw.input($("#input_example input")[0]);
+        let width = Math.min(window.innerWidth, window.innerHeight);
+        width = width > 1000 ? width/2 : width/1.2;
+        window.cw = Raphael.colorwheel($("#colorwheel"),width);
         window.cw.color('000000');
         window.cw.onchange(updateColor);
       })();
