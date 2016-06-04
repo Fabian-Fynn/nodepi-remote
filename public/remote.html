@@ -2,6 +2,8 @@
     <head>
       <link rel='stylesheet' href='main.css'>
       <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js" type="text/javascript"></script>
+      <script src="./colorwheel.js" type="text/javascript"></script>
     <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
       </head>
     <body>
@@ -10,19 +12,9 @@
       <h1> NodePi Remote </h1>
     <div id='property-wrapper'>
       <div class="toggle">
-        <button id="flash-toggle">Flash</button>
-      </div>
-      <div class="toggle">
-        <button id="light-toggle">Light</button>
-      </div>
-      <div class="toggle">
         <button id="allowguest-toggle">Guest Access</button>
       </div>
-      <button
-        class="jscolor {valueElement:null,value:'66ccff',onFineChange:'updateColor(this)'}"
-        style="border:2px solid black">
-        Pick a color
-      </button>
+      <div id="colorwheel"></div>
       <h2>Properties</h2>
       <div id='properties' class='index'>
       </div>
@@ -30,7 +22,15 @@
     </body>
     <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
     <script   src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.min.js"></script>
-    <script src="jscolor.min.js"></script>
+    <script src="js/utils.js"></script>
     <script src="index.js"></script>
+    <script>
+      (() => {
+        window.cw = Raphael.colorwheel($("#colorwheel"),350);
+        //cw.input($("#input_example input")[0]);
+        window.cw.color('000000');
+        window.cw.onchange(updateColor);
+      })();
+    </script>
     <script src="main.js"></script>
 </html>

@@ -1,4 +1,5 @@
 function render() {
+
   $('.property').remove();
   $('.add-btn').remove();
 
@@ -6,6 +7,11 @@ function render() {
     $('#property-wrapper').html('');
     $('#property-wrapper').append('<p> Guest remote is currently deactivated. </p>');
     return;
+  }
+
+  if ('led' in data) {
+    const rgb = data['led'].split(',');
+    window.cw.color(rgbToHex(rgb));
   }
 
   for(var key in data) {
@@ -19,28 +25,6 @@ function render() {
     }
   };
 
-  $('#flash-toggle').click(function(){
-    if( $('#flash .value').val() == "true" ) {
-      $('#flash .value').val("false");
-      $(this).removeClass('active');
-    } else if( $('#flash .value').val() == "false" ) {
-      $('#flash .value').val("true");
-      $(this).addClass('active');
-    }
-    saveProperties();
-  });
-
-  $('#light-toggle').click(function(){
-    if( $('#light .value').val() == "true" ) {
-      $('#light .value').val("false");
-      $(this).removeClass('active');
-    } else if( $('#light .value').val() == "false" ) {
-      $('#light .value').val("true");
-      $(this).addClass('active');
-    }
-    saveProperties();
-  });
-
   $('#allowguest-toggle').click(function(){
     if( $('#allowguest .value').val() == "true" ) {
       $('#allowguest .value').val("false");
@@ -53,13 +37,12 @@ function render() {
   });
 }
 
-function updateColor(jscolor) {
-  var i = 0;
-  var len = jscolor.rgb.length;
-  while(i < len){
-    jscolor.rgb[i] = Math.floor(jscolor.rgb[i]);
-    i++;
-  }
-  $('#led .value').val(jscolor.rgb.toString());
+function updateColor(color) {
+  const r = (~~color.r);
+  const g = (~~color.g);
+  const b = (~~color.b);
+  const rgb = r + ',' + g + ',' + b;
+
+  $('#led .value').val(rgb);
   saveProperties();
 }

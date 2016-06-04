@@ -30,9 +30,11 @@ body {
 
 .property {
   height: 44px;
-  width: 55%;
+  width: 60%;
+  position: relative;
+  left: 50vw;
+  transform: translateX(-50%);
   float: none;
-  display: inline-flex;
 }
 
 #properties.index .property {
@@ -94,11 +96,13 @@ button.active {
   background: #fff;
   font-size: 80%;
   font-weight: bold;
+  z-index: 100;
 }
 
 .menu ul {
   margin: 0;
   float: right;
+  list-style-type: none;
 }
 
 .menu li {
@@ -145,4 +149,11 @@ button.active {
   -moz-background-size: contain;
   -o-background-size: contain;
   background-size: contain;
+}
+
+#colorwheel {
+  position: relative;
+  left: 50vw;
+  transform: translateX(-50%);
+  z-index: 1;
 }

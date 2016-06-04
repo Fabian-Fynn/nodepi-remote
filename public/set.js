@@ -24,4 +24,6 @@ function render() {
   $('.false, .true').click(function(e){
     $('#' + e.target.parentElement.id + ' .value').val(e.target.className);
   });
+
+  console.log(data);
 }
