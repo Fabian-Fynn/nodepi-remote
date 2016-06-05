@@ -66,7 +66,7 @@ button.active {
   left: 0;
   width: 100%;
   margin: 0;
-  position: absolute;
+  position: fixed;
   vertical-align: middle;
   font-size: 25px;
   padding: 15px;
@@ -75,6 +75,7 @@ button.active {
   transition: opacity .5s ease-in-out;
   -moz-transition: opacity .5s ease-in-out;
   -webkit-transition: opacity .5s ease-in-out;
+  z-index: 3;
 }
 
 #alert.success {
@@ -156,4 +157,11 @@ button.active {
   left: 50vw;
   transform: translateX(-50%);
   z-index: 1;
+  margin-bottom: 30px;
+}
+
+#color-input {
+  font-size: 120%;
+  margin-bottom: 60px;
+  text-align: center;
 }

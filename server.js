@@ -59,29 +59,16 @@ app.get('/API/data', function(req, res) {
 });
 
 app.post('/API/set', jsonParser, function(req, res) {
-  if(authenticated(req.query['auth-key'])) {
-    jsonfile.readFile(stateFile, function(err, obj) {
-      if(err) {
-        console.log(err);
-      } else {
-        obj.properties = req.body;
-
-        jsonfile.writeFile(stateFile, obj, function(err) {
-          if(err) {
-            console.log(err);
-          } else {
-            res.send(obj);
-          }
-        });
-      }
-    });
-  } else {
+  try {
+    if (req.body.allowguest === undefined) {
+      throw 500;
+    }
+    if(authenticated(req.query['auth-key'])) {
       jsonfile.readFile(stateFile, function(err, obj) {
-        if(obj.properties.allowguest === true) {
-          for(var i = 0; i < obj.guestProperties.length; i++){
-            var key = obj.guestProperties[i];
-            obj.properties[key] = req.body[key];
-          }
+        if(err) {
+          console.log(err);
+        } else {
+          obj.properties = req.body;
 
           jsonfile.writeFile(stateFile, obj, function(err) {
             if(err) {
@@ -90,10 +77,32 @@ app.post('/API/set', jsonParser, function(req, res) {
               res.send(obj);
             }
           });
-      } else {
-        res.status(423).send('Guest access was deactivated!');
-      }
-    });
+        }
+      });
+    } else {
+        jsonfile.readFile(stateFile, function(err, obj) {
+          if(obj.properties.allowguest === true) {
+            for(var i = 0; i < obj.guestProperties.length; i++){
+              var key = obj.guestProperties[i];
+              obj.properties[key] = req.body[key];
+            }
+
+            jsonfile.writeFile(stateFile, obj, function(err) {
+              if(err) {
+                console.log(err);
+              } else {
+                res.send(obj);
+              }
+            });
+        } else {
+          res.status(423).send('Guest access was deactivated!');
+        }
+      });
+    }
+  } catch (err) {
+    res.status(500).send('Something went wrong!');
+    console.log(err);
+    console.log(req.body);
   }
 });
 

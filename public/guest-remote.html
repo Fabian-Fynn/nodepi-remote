@@ -11,7 +11,10 @@
     <div class="menu"></div>
       <h1> NodePi Guest Remote </h1>
     <div id='property-wrapper'>
+      <h2> LED Color Selector </h2>
       <div id="colorwheel"></div>
+      <input id="color-input"></input>
+      <button id="color-save">Save</button>
       <h2>Properties</h2>
       <div id='properties' class='index'>
       </div>
@@ -24,8 +27,9 @@
     <script>
       (() => {
         let width = Math.min(window.innerWidth, window.innerHeight);
-        width = width > 1000 ? width/2 : width/1.2;
-        window.cw = Raphael.colorwheel($("#colorwheel"),width);
+        width = width > 1000 ? width/2.5 : width/1.5;
+        window.cw = Raphael.colorwheel($("#colorwheel"),width, 200);
+        window.cw.input($("#color-input")[0]);
         window.cw.color('000000');
         window.cw.onchange(updateColor);
       })();

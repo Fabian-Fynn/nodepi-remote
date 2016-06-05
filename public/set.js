@@ -2,14 +2,21 @@ function render() {
   $('.property').remove();
   $('.add-btn').remove();
 
-  for(var key in data) {
+  const keys = [];
+
+  for (let key in data) {
+    keys.push(key);
+  }
+  keys.sort();
+
+  keys.forEach(function(key) {
     $('#properties').append('<div class="property" id="' + key +'">');
     $('#' + key).append('<input class="key" type="text" disabled="true" value="' + key + '">');
     $('#' + key).append('<input class="value" type="text" value="' + data[key] + '">');
     $('#' + key).append('<button class="false"> 0 </button>');
     $('#' + key).append('<button class="true"> 1 </button>');
     $('#' + key).append('<button class="remove-btn"> X </button>');
-  };
+  });
 
   $('#property-wrapper').append('<button class="add-btn"> + </button>');
 
@@ -24,6 +31,4 @@ function render() {
   $('.false, .true').click(function(e){
     $('#' + e.target.parentElement.id + ' .value').val(e.target.className);
   });
-
-  console.log(data);
 }

@@ -10,11 +10,23 @@ function render() {
   }
 
   if ('led' in data) {
-    const rgb = data['led'].split(',');
+    const rgb = $.map(data['led'].split(','), function(value) {
+      return parseInt(value, 10);
+    });
+
     window.cw.color(rgbToHex(rgb));
+    updateColor({r: rgb[0], g: rgb[1], b: rgb[2]});
   }
 
-  for(var key in data) {
+  const keys = [];
+
+  for (let key in data) {
+    keys.push(key);
+  }
+  keys.sort();
+
+  keys.forEach(function(key) {
+    console.log(key);
     $('#properties').append('<div class="property" id="' + key +'">');
     $('#' + key).append('<input class="key" type="text" disabled="true" value="' + key + '">');
     $('#' + key).append('<input class="value" type="text" disabled="true" value="' + data[key] + '">');
@@ -23,16 +35,20 @@ function render() {
         $('#' + key + '-toggle').addClass('active');
       }
     }
-  };
+  });
 
   $('#allowguest-toggle').click(function(){
-    if( $('#allowguest .value').val() == "true" ) {
+    if( $('#allowguest .value').val() !== "false" ) {
       $('#allowguest .value').val("false");
       $(this).removeClass('active');
-    } else if( $('#allowguest .value').val() == "false" ) {
+    } else if( $('#allowguest .value').val() === "false" ) {
       $('#allowguest .value').val("true");
       $(this).addClass('active');
     }
+    saveProperties();
+  });
+
+  $('#color-save').click(function(){
     saveProperties();
   });
 }
@@ -42,7 +58,9 @@ function updateColor(color) {
   const g = (~~color.g);
   const b = (~~color.b);
   const rgb = r + ',' + g + ',' + b;
+  const yiq = ((r*299)+(g*587)+(b*114))/1000;
+  const colr = (yiq >= 128) ? 'black' : 'white';
 
   $('#led .value').val(rgb);
-  saveProperties();
+  $('#color-input').css('color', colr);
 }
