@@ -7,6 +7,19 @@ body {
   color: rgb(64, 65, 55);
 }
 
+h1 {
+  line-height: 1.0;
+}
+
+h2 {
+  line-height: 1;
+}
+
+.title {
+  line-height: 0.5;
+  margin: 20px;
+}
+
 .toggle {
   width: 100%;
 }
@@ -157,6 +170,7 @@ button.active {
   left: 50vw;
   transform: translateX(-50%);
   z-index: 1;
+  margin-top: 20px;
   margin-bottom: 30px;
 }
 

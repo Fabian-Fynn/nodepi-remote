@@ -9,9 +9,12 @@
     <body>
     <div id="alert" > An error occured</div>
     <div class="menu"></div>
-      <h1> NodePi Remote </h1>
+      <h1 class="title"> NodePi Remote </h1>
     <div id='property-wrapper'>
-      <h2> LED Color Selector </h2>
+      <h2> LED Light </h2>
+      <div class="toggle">
+        <button id="light-toggle">OFF</button>
+      </div>
       <div id="colorwheel"></div>
       <input id="color-input"></input>
       <button id="color-save">Save</button>
@@ -30,7 +33,7 @@
     <script>
       (() => {
         let width = Math.min(window.innerWidth, window.innerHeight);
-        width = width > 1000 ? width/2.5 : width/1.5;
+        width = width > 1000 ? width/2.5 : width/2.0;
         window.cw = Raphael.colorwheel($("#colorwheel"),width, 200);
         window.cw.input($("#color-input")[0]);
         window.cw.color('000000');

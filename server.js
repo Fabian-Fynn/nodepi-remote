@@ -35,6 +35,33 @@ app.get('/set', function(req, res) {
   }
 });
 
+app.get('/API/toggle-light', function(req, res) {
+  if (authenticated(req.query['auth-key'])) {
+    jsonfile.readFile(stateFile, function(err, obj) {
+      if (err){
+        console.log(err);
+        res.send(err);
+      } else {
+        console.log(obj);
+        if (obj.properties.light) {
+          obj.properties.light = false;
+        } else {
+          obj.properties.light = true;
+        }
+
+        jsonfile.writeFile(stateFile, obj, function(err) {
+          if (err) {
+            console.log(err);
+            res.send(err);
+          } else {
+            res.send('OK');
+          }
+        });
+      }
+    });
+  }
+});
+
 app.get('/API/data', function(req, res) {
   if(authenticated(req.query['auth-key'])) {
     jsonfile.readFile(stateFile, function(err, obj) {

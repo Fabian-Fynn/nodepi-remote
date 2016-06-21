@@ -30,11 +30,31 @@ function render() {
     $('#properties').append('<div class="property" id="' + key +'">');
     $('#' + key).append('<input class="key" type="text" disabled="true" value="' + key + '">');
     $('#' + key).append('<input class="value" type="text" disabled="true" value="' + data[key] + '">');
-    if(key === 'flash' || key === 'light' || key === 'allowguest') {
-      if(data[key] === true) {
+    if (key === 'flash' || key === 'light' || key === 'allowguest') {
+      if (data[key] === true) {
         $('#' + key + '-toggle').addClass('active');
       }
+      if (key === 'light') {
+        if (data[key] === true) {
+          $('#light-toggle').html('ON');
+        } else {
+          $('#light-toggle').html('OFF');
+        }
+      }
     }
+  });
+
+  $('#light-toggle').click(function(){
+    if( $('#light .value').val() !== "false" ) {
+      $('#light .value').val("false");
+      $(this).html('OFF');
+      $(this).removeClass('active');
+    } else if( $('#light .value').val() === "false" ) {
+      $('#light .value').val("true");
+      $(this).html('ON');
+      $(this).addClass('active');
+    }
+    saveProperties();
   });
 
   $('#allowguest-toggle').click(function(){
