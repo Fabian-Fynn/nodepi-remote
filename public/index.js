@@ -36,23 +36,17 @@ function render() {
       }
       if (key === 'light') {
         if (data[key] === true) {
-          $('#light-toggle').html('ON');
-        } else {
-          $('#light-toggle').html('OFF');
+          $('#light-toggle').click();
         }
       }
     }
   });
 
-  $('#light-toggle').click(function(){
+  $('#light-toggle input').bind('change', function() {
     if( $('#light .value').val() !== "false" ) {
       $('#light .value').val("false");
-      $(this).html('OFF');
-      $(this).removeClass('active');
     } else if( $('#light .value').val() === "false" ) {
       $('#light .value').val("true");
-      $(this).html('ON');
-      $(this).addClass('active');
     }
     saveProperties();
   });

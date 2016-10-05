@@ -1,9 +1,12 @@
+html {
+  background: #333;
+}
+
 body {
-  padding-top: 95px;
   font-family: 'Source Code Pro', sans-serif;
   font-size: 200%;
   text-align: center;
-  background: #e1e3e4;
+  background: #333;
   color: rgb(64, 65, 55);
 }
 
@@ -105,10 +108,10 @@ button.active {
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  height: 50px;
   position: fixed;
   background: #fff;
-  font-size: 80%;
+  font-size: 90%;
   font-weight: bold;
   z-index: 100;
 }
@@ -122,11 +125,11 @@ button.active {
 .menu li {
   text-decoration: none;
   float: left;
-  height: 70px;
   padding: 18px 30px 10px 30px;
   color: #000;
   border-left: 1px solid #000;
   box-sizing: border-box;
+  height: 50px;
 }
 
 .menu a:hover li {
@@ -142,9 +145,9 @@ button.active {
 }
 
 .menu .logo {
-  width: 50px;
-  height: 50px;
-  margin: 11px 0 0 25px;
+  width: 40px;
+  height: 40px;
+  margin: 6px 0 0 8px;
   float: left;
   background: url(/assets/small-logo.png) no-repeat center;
   -webkit-background-size: contain;
@@ -165,9 +168,60 @@ button.active {
   background-size: contain;
 }
 
+.dashboard {
+  display: block;
+  background: #333;
+  margin-top: 45px;
+  padding-top: 15px;
+  color: #fff;
+  height: 100%;
+}
+
+.dashboard.white {
+  background: #eee;
+}
+
+.dashboard .col {
+  height: 110vh;
+  padding-top: 30px;
+  float: left;
+}
+
+.dashboard .left {
+  width: 45%;
+}
+
+.dashboard .col.right {
+  width: 55%;
+}
+
+.dashboard input, .dashboard button {
+  color: #000;
+}
+
+.dashboard .toggle button {
+  width: 173px;
+}
+
+.dashboard .settings {
+  clear: both;
+  margin-top: 100px;
+}
+
+#weather-widget {
+  background: #333;
+  width: 345px;
+  position: relative;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  //transform: translateY(-50%);
+}
+
+
 #colorwheel {
   position: relative;
-  left: 50vw;
+  left: 50%;
   transform: translateX(-50%);
   z-index: 1;
   margin-top: 20px;
@@ -178,4 +232,63 @@ button.active {
   font-size: 120%;
   margin-bottom: 60px;
   text-align: center;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
