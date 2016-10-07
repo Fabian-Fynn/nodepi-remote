@@ -92,14 +92,17 @@ button.active {
   -moz-transition: opacity .5s ease-in-out;
   -webkit-transition: opacity .5s ease-in-out;
   z-index: 3;
+  display: none;
 }
 
 #alert.success {
+  display: block;
   opacity: 1;
   background: rgba(200, 255, 200, 0.6);
 }
 
 #alert.error {
+  display: block;
   opacity: 1;
   background: rgba(255, 200, 200, 0.6);
 }
