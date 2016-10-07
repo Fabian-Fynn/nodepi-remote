@@ -42,7 +42,6 @@ app.get('/API/toggle-light', function(req, res) {
         console.log(err);
         res.send(err);
       } else {
-        console.log(obj);
         if (obj.properties.light) {
           obj.properties.light = false;
         } else {
@@ -87,9 +86,10 @@ app.get('/API/data', function(req, res) {
 
 app.post('/API/set', jsonParser, function(req, res) {
   try {
-    if (req.body.allowguest === undefined) {
+    //console.log(req.body);
+    /*if (req.body.allowguest === undefined) {
       throw 500;
-    }
+    }*/
     if(authenticated(req.query['auth-key'])) {
       jsonfile.readFile(stateFile, function(err, obj) {
         if(err) {
@@ -99,7 +99,7 @@ app.post('/API/set', jsonParser, function(req, res) {
 
           jsonfile.writeFile(stateFile, obj, function(err) {
             if(err) {
-              console.log(err);
+              console.log('err', err);
             } else {
               res.send(obj);
             }
@@ -116,7 +116,7 @@ app.post('/API/set', jsonParser, function(req, res) {
 
             jsonfile.writeFile(stateFile, obj, function(err) {
               if(err) {
-                console.log(err);
+                console.log('err',err);
               } else {
                 res.send(obj);
               }
@@ -127,8 +127,8 @@ app.post('/API/set', jsonParser, function(req, res) {
       });
     }
   } catch (err) {
+    console.log('err', err);
     res.status(500).send('Something went wrong!');
-    console.log(err);
     console.log(req.body);
   }
 });

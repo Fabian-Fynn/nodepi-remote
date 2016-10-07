@@ -73,7 +73,7 @@ button:hover {
 }
 
 button.active {
-  background: rgba(64, 65, 55, 1);
+  background: rgba(131, 205, 41, 1);
   color: #83cd29;
 }
 
@@ -86,7 +86,7 @@ button.active {
   vertical-align: middle;
   font-size: 25px;
   padding: 15px;
-  color: #888;
+  color: #000;
   opacity: 0;
   transition: opacity .5s ease-in-out;
   -moz-transition: opacity .5s ease-in-out;
@@ -206,6 +206,7 @@ button.active {
 .dashboard .settings {
   clear: both;
   margin-top: 100px;
+  margin-bottom: 100px;
 }
 
 #weather-widget {
