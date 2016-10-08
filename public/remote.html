@@ -1,4 +1,4 @@
-<html style="background: #333">
+<html style="background: #333" id="fullscreen">
     <head>
       <link rel='stylesheet' href='main.css'>
       <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
@@ -30,6 +30,7 @@
         <h2>Settings</h2>
         <div class="toggle">
           <button id="allowguest-toggle">Guest Access</button>
+          <button id="full"> Fullscreen</button>
         </div>
       </div>
     </div>
@@ -42,6 +43,7 @@
     <script src="js/utils.js"></script>
     <script src="index.js"></script>
     <script src="main.js"></script>
+
     <script>
       (() => {
         let width = Math.min(window.innerWidth, window.innerHeight);
@@ -63,5 +65,26 @@
         editCityButton: false,
         clock: true
       });
+      
+      function requestFullScreen(element) {
+        // Supports most browsers and their versions.
+        var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+        if (requestMethod) { // Native full screen.
+            requestMethod.call(element);
+        } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+            var wscript = new ActiveXObject("WScript.Shell");
+            if (wscript !== null) {
+                wscript.SendKeys("{F11}");
+            }
+        }
+    }
+
+    $('#full').click(function(){
+      console.log('click');
+      var elem = document.getElementById('fullscreen'); // Make the body go full screen.
+      requestFullScreen(elem);
+    })
+    
     </script>
 </html>
