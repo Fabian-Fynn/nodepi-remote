@@ -81,9 +81,13 @@
     }
 
     $('#full').click(function(){
-      console.log('click');
-      var elem = document.getElementById('fullscreen'); // Make the body go full screen.
-      requestFullScreen(elem);
+      if( $(this).hasClass('active') ) {
+        location.reload();
+      } else {
+        $(this).addClass('active');
+        var elem = document.getElementById('fullscreen'); // Make the body go full screen.
+        requestFullScreen(elem);
+      }
     })
     
     </script>
