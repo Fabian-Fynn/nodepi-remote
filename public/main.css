@@ -238,6 +238,13 @@ button.active {
   text-align: center;
 }
 
+#dev-footer {
+position: fixed;
+bottom: 20px;
+height: 10px;
+padding: 20px;
+}
+
 /* The switch - the box around the slider */
 .switch {
   position: relative;

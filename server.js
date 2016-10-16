@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
+var request = require('request');
 var path = require('path');
 var jsonfile = require('jsonfile');
 var stateFile = 'data.json';
@@ -16,6 +17,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/remote', function(req, res) {
+  requestLatestCommit(res);
   if(authenticated(req.query['auth-key'])) {
     res.sendFile(path.join(__dirname + '/public/remote.html'));
   } else {
@@ -90,48 +92,60 @@ app.post('/API/set', jsonParser, function(req, res) {
     /*if (req.body.allowguest === undefined) {
       throw 500;
     }*/
-    if(authenticated(req.query['auth-key'])) {
-      jsonfile.readFile(stateFile, function(err, obj) {
-        if(err) {
-          console.log(err);
-        } else {
-          obj.properties = req.body;
-
-          jsonfile.writeFile(stateFile, obj, function(err) {
-            if(err) {
-              console.log('err', err);
-            } else {
-              res.send(obj);
-            }
-          });
-        }
-      });
-    } else {
-        jsonfile.readFile(stateFile, function(err, obj) {
-          if(obj.properties.allowguest === true) {
-            for(var i = 0; i < obj.guestProperties.length; i++){
-              var key = obj.guestProperties[i];
-              obj.properties[key] = req.body[key];
-            }
-
-            jsonfile.writeFile(stateFile, obj, function(err) {
-              if(err) {
-                console.log('err',err);
-              } else {
-                res.send(obj);
-              }
-            });
-        } else {
-          res.status(423).send('Guest access was deactivated!');
-        }
-      });
-    }
+      saveProperties(stateFile, req, res);
   } catch (err) {
     console.log('err', err);
     res.status(500).send('Something went wrong!');
-    console.log(req.body);
   }
 });
+
+function saveProperties(stateFile, req, res) {
+  jsonfile.readFile(stateFile, function(err, obj) {
+    if(authenticated(req.query['auth-key'])) {
+      obj.properties = req.body;
+      saveFile(stateFile, obj, res);
+    } else if(obj.properties.allowguest === true) {
+      for(var i = 0; i < obj.guestProperties.length; i++){
+        var key = obj.guestProperties[i];
+        obj.properties[key] = req.body[key];
+      }
+      saveFile(stateFile, obj, res);
+    } else {
+      sendResponse(err, obj, res, {'code': 423, msg: 'Guest access was deactivated!'});
+    }
+  });
+};
+
+function saveProperty(key, value, res) {
+  jsonfile.readFile(stateFile, function(err, obj) {
+    if(err) {
+      sendResponse(err, null, res, null);
+    } else {
+      obj.properties[key] = value;
+      saveFile(stateFile, obj, res, false);
+    }
+  });
+};
+
+
+function saveFile(file, obj, res, respond) {
+  jsonfile.writeFile(stateFile, obj, function(err) {
+    if(respond !== false) {
+      sendResponse(err, obj, res, {'code': 200, 'msg': 'OK'});
+    }
+  });
+};
+
+function sendResponse(err, obj, res, status) {
+  if(err) {
+    console.log('err', err);
+    res.status(500).send('Something went wrong!');
+  } else if (status.code !== 200) {
+    res.status(status.code).send(status.msg);
+  } else {
+    res.send(obj);
+  }
+};
 
 function authenticated(token) {
   if (token === secrets.token) {
@@ -151,8 +165,26 @@ function filterProperties(properties, guestProperties) {
   return result;
 }
 
+function requestLatestCommit(res) {
+  var path = 'https://api.github.com/repos/Fabian-Fynn/nodepi-remote/git/refs/heads/master';
+
+  makeApiRequest(path, res);
+};
+
+function makeApiRequest(path, res) {
+  request({
+    uri: path,
+    method: 'GET',
+    timeout: 10000,
+    followRedirect: true,
+    maxRedirects: 10,
+    headers: {'user-agent': 'node.js'}
+  },
+    function(err, resp, body) {
+      saveProperty('sha', JSON.parse(body).object.sha, res);
+  });
+};
 http.listen(9900, function() {
   console.log('There we go ♕');
   console.log('Gladly listening on http://127.0.0.1:9900');
 });
-

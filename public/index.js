@@ -18,6 +18,10 @@ function render() {
     updateColor({r: rgb[0], g: rgb[1], b: rgb[2]});
   }
 
+  if ('sha' in data) {
+    $('#dev-footer').html('commit: ' + data.sha);
+  }
+
   const keys = [];
 
   for (let key in data) {
