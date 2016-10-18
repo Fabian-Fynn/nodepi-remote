@@ -64,9 +64,11 @@
         conditionName: false,
         geolocationButton: false,
         editCityButton: false,
-        clock: true
+        clock: true,
+        refreshTimeout: 0.04,
+        refreshIndicator: true
       });
-      
+
       function requestFullScreen(element) {
         // Supports most browsers and their versions.
         var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
