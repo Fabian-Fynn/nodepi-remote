@@ -22,6 +22,10 @@ function render() {
     $('#dev-footer').html('commit: ' + data.sha);
   }
 
+  if (data['devfooter']) {
+    $('#dev-footer').show();
+  }
+
   const keys = [];
 
   for (let key in data) {
