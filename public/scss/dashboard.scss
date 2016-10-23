@@ -8,14 +8,14 @@ $tile-width-small: 50px;
 .rm-Dashboard {
   display: block;
   background: $main-bgc;
-//  margin-top: 50px;
   padding-top: 30px;
   color: #fff;
-  height: 100%;
+  min-height: 50%;
 }
 
 .rm-Dashboard_Column {
-  height: 110vh;
+  min-height: 50%;
+  max-height: 100%;
   float: left;
 }
 
