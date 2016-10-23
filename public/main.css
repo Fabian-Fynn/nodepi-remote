@@ -236,7 +236,7 @@ button.active {
   background: #333;
   width: 345px;
   position: relative;
-  top: 15%;
+  top: 20%;
   left: 50%;
   transform: translateX(-50%);
   //transform: translateY(-50%);
