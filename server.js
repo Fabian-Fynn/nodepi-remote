@@ -181,7 +181,14 @@ function makeApiRequest(path, res) {
     headers: {'user-agent': 'node.js'}
   },
     function(err, resp, body) {
-      saveProperty('sha', JSON.parse(body).object.sha, res);
+      console.log();
+      if(err) {
+        console.log(err);
+      } else if(resp.statusCode === 403) {
+        console.log(body);
+      } else {
+        saveProperty('sha', JSON.parse(body).object.sha, res);
+      }
   });
 };
 http.listen(9900, function() {

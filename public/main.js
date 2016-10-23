@@ -4,6 +4,62 @@ $('#save-properties').click(function(){
   saveProperties();
 });
 
+$('#toggle-hidemenu').click(function(el){
+  $(this).toggleClass('active');
+  $('.menu').toggleClass('closed');
+});
+
+$('#toggle-light').click(function(el){
+  $(this).toggleClass('active');
+    $(this).css('background-color', 'rgb(' + $('#led .value').val() + ')');
+    if( $('#light .value').val() !== "false" ) {
+      $('#light .value').val("false");
+    } else if( $('#light .value').val() === "false" ) {
+      $('#light .value').val("true");
+    }
+    saveProperties();
+});
+
+$('#toggle-maximize').click(function(){
+  if( $(this).hasClass('active') ) {
+    location.reload();
+  } else {
+    $(this).addClass('active');
+    var elem = document.getElementById('fullscreen'); // Make the body go full screen.
+    requestFullScreen(elem);
+  }
+});
+
+$('#toggle-colorPicker').click(function(ev){
+  ev.stopPropagation();
+  $('#colorWheelContainer').toggleClass('active');
+});
+
+ $('.rm-Dashboard').click(function(e){
+    if (e.target.id !== '#colorWheelContainer' && $('#colorWheelContainer').hasClass('active')) {
+      $('#colorWheelContainer').removeClass('active');
+    }
+ });
+
+$('#color-input').change(function(){
+  saveProperties();
+});
+
+$('#colorWheel svg').mouseup(function(){
+  console.log('change');
+});
+
+$('#toggle-allowguest').click(function(){
+  if( $('#allowguest .value').val() !== "false" ) {
+    $('#allowguest .value').val("false");
+    $(this).removeClass('active');
+  } else if( $('#allowguest .value').val() === "false" ) {
+    $('#allowguest .value').val("true");
+    $(this).addClass('active');
+  }
+  saveProperties();
+});
+
 function addProperty() {
   if( $('#new-property .key').val() !== '') {
     $('#new-property .key').attr('disabled', true);
@@ -69,8 +125,11 @@ function saveProperties() {
       }
 
       newData[key] = value;
+      localStorage.setItem(key, value);
     }
   });
+
+  $('#toggle-light').css('background-color', 'rgb(' + $('#led .value').val() + ')');
 
   data = newData;
 
@@ -136,6 +195,20 @@ function requestData(token){
 
   xhttp.open("GET", "/API/data?auth-key=" + token, true);
   xhttp.send();
+}
+
+function requestFullScreen(element) {
+  // Supports most browsers and their versions.
+  var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+  if (requestMethod) { // Native full screen.
+      requestMethod.call(element);
+  } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+      var wscript = new ActiveXObject("WScript.Shell");
+      if (wscript !== null) {
+          wscript.SendKeys("{F11}");
+      }
+  }
 }
 
 (function(){
