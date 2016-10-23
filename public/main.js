@@ -141,7 +141,7 @@ function saveProperties() {
    contentType: "application/json; charset=utf-8",
    dataType: "json",
    success: function(data){
-     showAlert('success', 'Saved.');
+     //showAlert('success', 'Saved.');
    },
    failure: function(errMsg) {
      showAlert('error', errMsg);
