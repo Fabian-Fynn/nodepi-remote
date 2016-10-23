@@ -236,11 +236,10 @@ button.active {
 #weather-widget {
   background: #333;
   width: 345px;
-  position: relative;
-  top: 20%;
+  position: absolute;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  //transform: translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
 }
 
 
