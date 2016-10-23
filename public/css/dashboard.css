@@ -68,12 +68,14 @@
 .rm-Dashboard_Tile-toggleNav {
   background-image: url("../assets/hide-nav.svg"); }
   .rm-Dashboard_Tile-toggleNav.active {
-    background-image: url("../assets/show-nav.svg"); }
+    background-image: url("../assets/show-nav.svg");
+    background-color: #5E5E5E; }
 
 .rm-Dashboard_Tile-toggleFullscreen {
   background-image: url("../assets/maximize.svg"); }
   .rm-Dashboard_Tile-toggleFullscreen.active {
-    background-image: url("../assets/end-fullscreen.svg"); }
+    background-image: url("../assets/end-fullscreen.svg");
+    background-color: #5E5E5E; }
 
 .rm-Dashboard_Tile-toggleLight {
   background-image: url("../assets/light-off.svg");

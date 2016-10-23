@@ -33,9 +33,9 @@ function render() {
       if (data[key] === true) {
         $('#toggle-' + key).addClass('active');
       }
-      if (key === 'light') {
+      if (key === 'hidemenu') {
         if (data[key] === true) {
-          $('#toggle-light').addClass('active');
+          $('.menu').toggleClass('closed');
         }
       }
     }

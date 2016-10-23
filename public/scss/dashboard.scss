@@ -98,6 +98,7 @@ $tile-width-small: 50px;
 
   &.active {
     background-image: url('../assets/show-nav.svg');
+    background-color: #5E5E5E;
   }
 }
 
@@ -106,6 +107,7 @@ $tile-width-small: 50px;
 
   &.active {
     background-image: url('../assets/end-fullscreen.svg');
+    background-color: #5E5E5E;
   }
 }
 

@@ -7,6 +7,11 @@ $('#save-properties').click(function(){
 $('#toggle-hidemenu').click(function(el){
   $(this).toggleClass('active');
   $('.menu').toggleClass('closed');
+  if( $('#hidemenu .value').val() !== 'false' ) {
+    $('#hidemenu .value').val('false');
+  } else if( $('#hidemenu .value').val() === 'false') {
+    $('#hidemenu .value').val('true');
+  }
 });
 
 $('#toggle-light').click(function(el){
