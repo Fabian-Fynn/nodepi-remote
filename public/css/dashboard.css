@@ -46,12 +46,12 @@
   background-repeat: no-repeat;
   background-position: center center; }
 
-.rm-Dashboard_Tile:hover {
-  transform: scale(1.1); }
+@media (min-width: 1025px) {
+  .rm-Dashboard_Tile:hover {
+    transform: scale(1.1); }
 
-.rm-Dashboard_Tile-small:hover {
-  transform: scale(1.2); }
-
+  .rm-Dashboard_Tile-small:hover {
+    transform: scale(1.2); } }
 .rm-Dashboard_Tile-small:nth-child(even) {
   margin-right: 30px; }
 
