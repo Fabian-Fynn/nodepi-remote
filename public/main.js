@@ -12,6 +12,7 @@ $('#toggle-hidemenu').click(function(el){
   } else if( $('#hidemenu .value').val() === 'false') {
     $('#hidemenu .value').val('true');
   }
+  saveProperties();
 });
 
 $('#toggle-light').click(function(el){
