@@ -12,8 +12,12 @@
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
+    "ical": "^0.5.0",
+    "ical2json": "^0.3.0",
+    "ics-parse": "0.0.3",
     "jsonfile": "^2.2.3",
     "path": "^0.12.7",
-    "request": "^2.75.0"
+    "request": "^2.75.0",
+    "vdata-parser": "^0.1.5"
   }
 }

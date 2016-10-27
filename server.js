@@ -16,6 +16,11 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
+app.get('/events', function(req, res) {
+  var events = require('./events.js')(res);
+  //events.events(res);
+});
+
 app.get('/remote', function(req, res) {
   requestLatestCommit(res);
   if(authenticated(req.query['auth-key'])) {

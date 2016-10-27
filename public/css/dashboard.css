@@ -94,6 +94,12 @@
     background-image: url("../assets/guest.svg");
     background-color: #5E5E5E; }
 
+.rm-Dashboard_Tile-toggleCalendar {
+  background-image: url("../assets/calendar.svg");
+  background-size: 65%; }
+  .rm-Dashboard_Tile-toggleCalendar.active {
+    background-color: #5E5E5E; }
+
 .rm-Dashboard-ColorWheel {
   width: 45vw;
   height: 0 !important;
@@ -113,5 +119,37 @@
 .rm-Dashboard-ColorWheel.active {
   display: block;
   height: 45vw !important; }
+
+.rm-Dashboard_Calendar {
+  width: 100vw;
+  height: 0vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  padding: 0 50px;
+  padding-right: 50px;
+  overflow-y: hidden;
+  transition-property: all;
+  transition-duration: .5s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1); }
+
+.rm-Dashboard_Calendar.active {
+  display: block;
+  height: 100vh !important; }
+
+.rm-Dashboard_Calendar #calendar {
+  margin-top: 30px; }
+
+.rm-Dashboard_Calendar-closeButton {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 0;
+  margin-right: 0px !important;
+  box-sizing: border-box;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  font-size: 20px; }
 
 /*# sourceMappingURL=dashboard.css.map */

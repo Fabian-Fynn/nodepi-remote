@@ -40,6 +40,14 @@ $('#toggle-colorPicker').click(function(ev){
   $('#colorWheelContainer').toggleClass('active');
 });
 
+$('#toggle-calendar').click(function(){
+  $('.rm-Dashboard_Calendar').addClass('active');
+});
+
+$('#close-calendar').click(function(){
+  $('.rm-Dashboard_Calendar').removeClass('active');
+});
+
  $('.rm-Dashboard').click(function(e){
     if (e.target.id !== '#colorWheelContainer' && $('#colorWheelContainer').hasClass('active')) {
       $('#colorWheelContainer').removeClass('active');

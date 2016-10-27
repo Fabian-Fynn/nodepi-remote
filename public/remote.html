@@ -2,11 +2,13 @@
     <head>
       <link rel='stylesheet' href='main.css'>
       <link rel='stylesheet' href='css/dashboard.css'>
+      <link rel='stylesheet' href='css/calendar.css'>
       <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
       <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js" type="text/javascript"></script>
       <script src="./colorwheel.js" type="text/javascript"></script>
       <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
       <link rel="stylesheet" type="text/css" href="http://assets.fabianhoffmann.io/weather-widget/latest/weather.css">
+      <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
       </head>
     <body>
@@ -28,8 +30,13 @@
           <div id="toggle-colorPicker" class="rm-Dashboard_Tile rm-Dashboard_Tile-big rm-Dashboard_Tile-toggleColorWheel"></div>
         </div>
         <div class="rm-Dashboard_Row rm-Dashboard_Row-big">
+          <div id="toggle-calendar" class="rm-Dashboard_Tile rm-Dashboard_Tile-big rm-Dashboard_Tile-toggleCalendar"></div>
           <div id="toggle-allowguest" class="rm-Dashboard_Tile rm-Dashboard_Tile-big rm-Dashboard_Tile-toggleGuest"></div>
         </div>
+      </div>
+      <div class="rm-Dashboard_Calendar">
+        <div id="close-calendar" class="rm-Dashboard_Tile rm-Dashboard_Calendar-closeButton">X</div>
+        <div id="calendar"></div>
       </div>
       <div id='dev-footer'></div>
     </div>
@@ -42,6 +49,8 @@
     </body>
     <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
     <script   src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js" type="text/javascript"></script>
     <script src="http://assets.fabianhoffmann.io/weather-widget/latest/weather.js"></script>
     <script src="js/utils.js"></script>
     <script src="main.js"></script>
@@ -49,6 +58,23 @@
 
     <script>
       getColorWheel(590);
+
+      $('#calendar').fullCalendar({
+        weekends: false,
+        defaultView: 'agendaWeek',
+        events: '/events',
+        minTime: "08:00",
+        maxTime: "19:30",
+        height: 550,
+        nowIndicator: true,
+        allDaySlot: false,
+        timeFormat: 'HH:mm',
+        views: {
+          agenda: {
+            titleFormat:  "D MMM"
+          }
+        }
+      });
 
       weather({
         element: "weather-widget",

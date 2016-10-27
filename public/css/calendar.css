@@ -1,0 +1,22 @@
+#calendar {
+  color: #fff !important; }
+  #calendar .fc-axis, #calendar .fc-day-header {
+    color: #fff !important; }
+  #calendar button.fc-today-button.fc-button.fc-state-default.fc-corner-left.fc-corner-right.fc-state-disabled {
+    background-color: #fff !important; }
+  #calendar .fc-day-grid {
+    height: 25px; }
+    #calendar .fc-day-grid .fc-axis.fc-widget-content {
+      vertical-align: top; }
+  #calendar .fc-today {
+    background-color: #444; }
+  #calendar .fc-event {
+    background-color: #206616;
+    border: 1px solid #aaa;
+    padding: 3px; }
+  #calendar .fc-toolbar {
+    padding: 0 20px; }
+  #calendar .fc-bg {
+    background: none; }
+
+/*# sourceMappingURL=calendar.css.map */
