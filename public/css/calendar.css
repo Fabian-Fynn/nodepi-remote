@@ -14,9 +14,39 @@
     background-color: #206616;
     border: 1px solid #aaa;
     padding: 3px; }
+  #calendar .fc-title {
+    font-weight: bold;
+    font-size: 13.5px; }
+  #calendar .fc-location {
+    font-size: .85em; }
   #calendar .fc-toolbar {
     padding: 0 20px; }
   #calendar .fc-bg {
     background: none; }
+
+.rm-Dashboard_Calendar-eventPopUp {
+  width: 330px;
+  height: 180px;
+  background-color: #000;
+  border-radius: 4%;
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 10;
+  font-size: 200%;
+  padding-top: 20px; }
+
+.rm-Dashboard_Calendar-eventPopUpTitle {
+  font-weight: bold; }
+
+.rm-Dashboard_Calendar-eventPopUpDate {
+  font-size: 80%; }
+
+.rm-Dashboard_Calendar-eventPopUpLocation {
+  font-size: 80%; }
 
 /*# sourceMappingURL=calendar.css.map */

@@ -59,10 +59,6 @@ $('#color-input').change(function(){
   saveProperties();
 });
 
-$('#colorWheel svg').mouseup(function(){
-  console.log('change');
-});
-
 $('#toggle-allowguest').click(function(){
   if( $('#allowguest .value').val() !== "false" ) {
     $('#allowguest .value').val("false");

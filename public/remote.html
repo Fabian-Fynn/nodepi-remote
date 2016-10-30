@@ -35,6 +35,7 @@
         </div>
       </div>
       <div class="rm-Dashboard_Calendar">
+        <div id="calendar-event-popup" class="rm-Dashboard_Calendar-eventPopUp"></div>
         <div id="close-calendar" class="rm-Dashboard_Tile rm-Dashboard_Calendar-closeButton">X</div>
         <div id="calendar"></div>
       </div>
@@ -73,6 +74,39 @@
           agenda: {
             titleFormat:  "D MMM"
           }
+        },
+        eventRender: function(event, element) {
+          element.attr("location", event.location);
+          $(element).find('.fc-content').append('<div class="fc-location">' + event.location + '</div>');
+        },
+        eventBackgroundColor: "rgb(" + localStorage.getItem('led') + ")",
+        eventTextColor: localStorage.getItem('colr'),
+        eventClick: function(event) {
+          var startH = event.start._pf.parsedDateParts[3];
+          startH = (startH < 10) ? ("0" + startH) : startH;
+          var startM = event.start._pf.parsedDateParts[4];
+          startM = (startM < 10) ? ("0" + startM) : startM;
+          var start = startH + ':' + startM;
+
+          var endH = event.end._pf.parsedDateParts[3];
+          endH = (endH < 10) ? ("0" + endH) : endH;
+          var endM = event.end._pf.parsedDateParts[4];
+          endM = (endM < 10) ? ("0" + endM) : endM;
+          var start = startH + ':' + startM;
+          var end = endH + ':' + endM;
+
+          $('#calendar-event-popup').html('<div class="rm-Dashboard_Calendar-eventPopUpDate">' + start + '-' + end + '</div><div class="rm-Dashboard_Calendar-eventPopUpTitle">' + event.title + '</div><div class="rm-Dashboard_Calendar-eventPopUpLocation">' + event.location + '</div>');
+
+          $('#calendar-event-popup').css('background-color', "rgb(" + localStorage.getItem('led') + ")");
+          $('#calendar-event-popup').css('color', localStorage.getItem('colr'));
+          var $title = $('#calendar-event-popup .rm-Dashboard_Calendar-eventPopUpTitle');
+          //$('#calendar-event-popup').height(80 + $title.height() + 'px');
+          $('.rm-Dashboard_Calendar').children().hide();
+          $('#calendar-event-popup').show();
+          $('#calendar-event-popup').click(function(){
+            $('.rm-Dashboard_Calendar').children().show();
+            $('#calendar-event-popup').hide();
+          });
         }
       });
 

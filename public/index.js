@@ -1,5 +1,4 @@
 function render() {
-
   $('.property').remove();
   $('.add-btn').remove();
 
@@ -25,7 +24,6 @@ function render() {
   keys.sort();
 
   keys.forEach(function(key) {
-//    console.log(key);
     $('#properties').append('<div class="property" id="' + key +'">');
     $('#' + key).append('<input class="key" type="text" disabled="true" value="' + key + '">');
     $('#' + key).append('<input class="value" type="text" disabled="true" value="' + data[key] + '">');
@@ -70,6 +68,9 @@ function updateColor(color) {
   const yiq = ((r*299)+(g*587)+(b*114))/1000;
   const colr = (yiq >= 128) ? 'black' : 'white';
 
+  localStorage.setItem('colr', colr);
   $('#led .value').val(rgb);
   $('#color-input').css('color', colr);
+  $('.fc-event').css('background-color', 'rgb(' + rgb + ')');
+  $('.fc-event').css('color', colr);
 }
