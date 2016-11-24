@@ -1,5 +1,7 @@
 {
  "name": "NodePi",
+ "display": "standalone",
+ "orientation": "landscape",
  "icons": [
   {
    "src": "\/favicon\/android-icon-36x36.png",
