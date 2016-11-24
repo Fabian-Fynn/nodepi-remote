@@ -30,10 +30,14 @@ function render() {
     if (key === 'maximize' || key === 'light' || key === 'allowguest' || key === 'hidemenu') {
       if (data[key] === true) {
         $('#toggle-' + key).addClass('active');
+      } else {
+        $('#toggle-' + key).removeClass('active');
       }
       if (key === 'hidemenu') {
         if (data[key] === true) {
-          $('.menu').toggleClass('closed');
+          $('.menu').addClass('closed');
+        } else {
+          $('.menu').removeClass('closed');
         }
       }
     }

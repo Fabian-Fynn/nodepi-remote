@@ -1,1 +1,1 @@
-{"properties":{"allowguest":true,"devfooter":false,"hidemenu":true,"led":"255,156,26","light":true,"sha":"6f9565eaf81412874302ba0d42b67fb8eb50c813"},"guestProperties":["led","flash"]}
+{"properties":{"hidemenu":false,"led":"127,255,0","light":false,"sha":"a83d0fc48a1d8864e9ce5b564860a53e0f70625f"},"guestProperties":["led","flash"]}

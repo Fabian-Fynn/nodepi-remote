@@ -59,6 +59,14 @@
     <script src="index.js"></script>
 
     <script>
+
+      var token = getParameterByName('auth-key');
+      var tokenQuery = '';
+
+      if(token !== null) {
+        tokenQuery = '?auth-key=' + token;
+      }
+      setInterval(function(){requestData(token)}, 1000);
       getColorWheel(590);
 
       $('#calendar').fullCalendar({
