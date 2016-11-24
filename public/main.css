@@ -237,9 +237,15 @@ button.active {
   background: #333;
   width: 345px;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
+}
+
+@media (min-width: 1020px){
+  #weather-widget{
+    top: 50% !important;
+  }
 }
 
 

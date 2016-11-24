@@ -14,31 +14,45 @@ $tile-width-small: 50px;
 }
 
 .rm-Dashboard_Column {
-  min-height: 50%;
-  max-height: 100%;
-  float: left;
+  width: 100%;
+  @media (min-width: 1020px){
+    min-height: 50%;
+    max-height: 100%;
+    float: left;
+  }
 }
 
 .rm-Dashboard_Column-left {
-  width: 25%;
+  @media (min-width: 1020px){
+    width: 25%;
+  }
 //  border-right: 1px solid red;
 }
 
 .rm-Dashboard_Column-center {
-  width: 50%;
+  @media (min-width: 1020px){
+    width: 50%;
+  }
 //  border-right: 1px solid red;
 }
 
 .rm-Dashboard_Column-right {
-  width: 25%;
+  @media (min-width: 1020px){
+    width: 25%;
+  }
 }
 
 .rm-Dashboard_Row {
- width: 100%;
- height: $tile-width-small;
- margin-bottom: 15px;
- padding-right: 21px;
- text-align: right;
+  width: auto;
+  float: right;
+  @media (min-width: 1020px){
+   width: 100%;
+   float: none;
+  }
+  height: $tile-width-small;
+  margin-bottom: 15px;
+  padding-right: 21px;
+  text-align: right;
 }
 
 .rm-Dashboard_Row-right {

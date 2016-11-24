@@ -1,4 +1,5 @@
 node_modules
 config/secrets.js
 .DS_Store
-public/.sass-cache
+*.scssc
+./sass-cache/*
