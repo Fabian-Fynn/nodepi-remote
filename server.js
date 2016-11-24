@@ -7,6 +7,8 @@ var jsonfile = require('jsonfile');
 var stateFile = 'data.json';
 var bodyParser = require('body-parser');
 var secrets = require('./config/secrets.js');
+var Logger = require('./logger.js');
+
 
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -51,8 +53,10 @@ app.get('/API/toggle-light', function(req, res) {
       } else {
         if (obj.properties.light) {
           obj.properties.light = false;
+          Logger.logLightChange({on: false, off: true, trigger: 'API'});
         } else {
           obj.properties.light = true;
+          Logger.logLightChange({on: true, off: false, trigger: 'API'});
         }
 
         jsonfile.writeFile(stateFile, obj, function(err) {
@@ -60,6 +64,7 @@ app.get('/API/toggle-light', function(req, res) {
             console.log(err);
             res.send(err);
           } else {
+            console.log(Logger.getLightChanges(null));
             res.send('OK');
           }
         });

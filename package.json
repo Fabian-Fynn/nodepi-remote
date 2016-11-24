@@ -16,6 +16,7 @@
     "ical2json": "^0.3.0",
     "ics-parse": "0.0.3",
     "jsonfile": "^2.2.3",
+    "mongoose": "^4.7.0",
     "path": "^0.12.7",
     "request": "^2.75.0",
     "vdata-parser": "^0.1.5"
