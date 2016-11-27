@@ -46,6 +46,27 @@ function render() {
   $('#toggle-light').css('background-color', 'rgb(' + $('#led .value').val() + ')');
 }
 
+function renderStats() {
+  //Light on off
+  var oldDate = '';
+  $('#statistics').append('<table class="rm-Dashboard_PopupStat-lightSwitch">');
+  for (key in stats) {
+    var date = new Date(stats[key].createdAt);
+    var dateString = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear();
+    var action = (stats[key].turnOn)? 'ON':'OFF';
+
+    console.log(oldDate);
+    if(oldDate != dateString && oldDate !== '') {
+      console.log('asdf');
+      $('#statistics').append('<tr class="rm-Dashboard_PopupStat-tuple"><td>----</td><td>------</td><tr>');
+    }
+    oldDate = dateString;
+    $('#statistics').append('<tr class="rm-Dashboard_PopupStat-tuple"><td>' + dateString + '</td><td>' + action + '</td></tr>');
+    console.log(stats[key]);
+  };
+    $('#statistics').append('</table>');
+}
+
 function getColorWheel(width){
   window.cw = Raphael.colorwheel($("#colorWheel"),width/1.80, 200);
   window.cw.input($("#color-input")[0]);

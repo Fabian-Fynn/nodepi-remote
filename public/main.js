@@ -1,4 +1,5 @@
 var data;
+var stats;
 
 $('#save-properties').click(function(){
   saveProperties();
@@ -42,11 +43,26 @@ $('#toggle-colorPicker').click(function(ev){
 });
 
 $('#toggle-calendar').click(function(){
-  $('.rm-Dashboard_Calendar').addClass('active');
+  $('.rm-Dashboard_Popup').addClass('active');
+  $('.rm-Dashboard_Popup-calendar').addClass('active');
+  $('.rm-Dashboard_Popup-calendar').show();
 });
 
-$('#close-calendar').click(function(){
-  $('.rm-Dashboard_Calendar').removeClass('active');
+$('#close-popup').click(function(){
+  $('.rm-Dashboard_Popup').removeClass('active');
+  $('.rm-Dashboard_Popup-calendar').hide();
+  $('.rm-Dashboard_Popup-statistics').hide();
+});
+
+$('#toggle-statistics').click(function(){
+  $('.rm-Dashboard_Popup').addClass('active');
+  $('.rm-Dashboard_Popup-calendar').hide();
+  $('.rm-Dashboard_Popup-statistics').show();
+});
+
+$('#close-statistics').click(function(){
+  $('.rm-Dashboard_Popup').removeClass('active');
+  $('.rm-Dashboard_Popup-statistics').removeClass('active');
 });
 
  $('.rm-Dashboard').click(function(e){
@@ -189,21 +205,34 @@ function getParameterByName(name) {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-function requestData(token){
+function requestData(token, req){
   var xhttp = new XMLHttpRequest();
 
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
+      var dat;
       if(xhttp.responseText !== '') {
-        data = JSON.parse(xhttp.responseText);
+        dat = JSON.parse(xhttp.responseText);
       } else {
-        data = {};
+        dat = {};
       }
-      render();
+      if(req === 'data'){
+        data = dat;
+        render();
+      } else if(req === 'stats') {
+        stats = dat;
+        renderStats();
+      }
     }
   };
 
-  xhttp.open("GET", "/API/data?auth-key=" + token, true);
+  var url;
+  if(req === 'data'){
+    url = "/API/data?auth-key=" + token;
+  } else if(req === 'stats') {
+    url = "/API/statistics?auth-key=" + token;
+  }
+  xhttp.open("GET", url, true);
   xhttp.send();
 }
 
@@ -229,7 +258,8 @@ function requestFullScreen(element) {
     tokenQuery = '?auth-key=' + token;
   }
 
-  requestData(token);
+  requestData(token, 'data');
+  requestData(token, 'stats');
 
   $('.menu').append('<a href="/' + tokenQuery + '"><div class="logo"></div></a><ul><a href="/guest-remote' + tokenQuery + '"><li>Guest Remote</li></a><a href="/remote' + tokenQuery + '"><li>Remote Control</li></a><a href="/set' + tokenQuery + '"><li>Set Properties</li></a></ul>');
 })();

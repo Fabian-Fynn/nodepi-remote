@@ -111,6 +111,12 @@
   .rm-Dashboard_Tile-toggleCalendar.active {
     background-color: #5E5E5E; }
 
+.rm-Dashboard_Tile-toggleStatistics {
+  background-image: url("../assets/stats.svg");
+  background-size: 65%; }
+  .rm-Dashboard_Tile-toggleStatistics.active {
+    background-color: #5E5E5E; }
+
 .rm-Dashboard-ColorWheel {
   width: 45vw;
   height: 0 !important;
@@ -131,7 +137,7 @@
   display: block;
   height: 45vw !important; }
 
-.rm-Dashboard_Calendar {
+.rm-Dashboard_Popup {
   width: 100vw;
   height: 0vh;
   position: absolute;
@@ -145,14 +151,17 @@
   transition-duration: .5s;
   transition-timing-function: cubic-bezier(0, 1, 0.5, 1); }
 
-.rm-Dashboard_Calendar.active {
+.rm-Dashboard_Popup.active {
   display: block;
   height: 100vh !important; }
 
-.rm-Dashboard_Calendar #calendar {
+.rm-Dashboard_Popup #calendar {
   margin-top: 10px; }
 
-.rm-Dashboard_Calendar-closeButton {
+.rm-Dashboard_Popup-statistics {
+  display: none; }
+
+.rm-Dashboard_Popup-closeButton {
   width: 40px;
   height: 40px;
   position: absolute;

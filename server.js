@@ -109,10 +109,25 @@ app.post('/API/set', jsonParser, function(req, res) {
   }
 });
 
+app.get('/API/statistics', function(req, res) {
+  if(authenticated(req.query['auth-key'])) {
+    Logger.getLightChanges(null, function(stats){
+    res.send(stats);
+    });
+  } else {
+    res.status(403).send('Unauthorized');
+  }
+});
+
 function saveProperties(stateFile, req, res) {
   jsonfile.readFile(stateFile, function(err, obj) {
     if(authenticated(req.query['auth-key'])) {
       obj.properties = req.body;
+      if(obj.properties.light === true) {
+        Logger.logLightChange({on: true, off: false, trigger: 'dashboard'});
+      } else if(obj.properties.light === false) {
+        Logger.logLightChange({on: false, off: true, trigger: 'dashboard'});
+      }
       saveFile(stateFile, obj, res);
     } else if(obj.properties.allowguest === true) {
       for(var i = 0; i < obj.guestProperties.length; i++){
@@ -191,7 +206,6 @@ function makeApiRequest(path, res) {
     headers: {'user-agent': 'node.js'}
   },
     function(err, resp, body) {
-      console.log();
       if(err) {
         console.log(err);
       } else if(resp.statusCode === 403) {

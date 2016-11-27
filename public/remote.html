@@ -34,11 +34,18 @@
           <div id="toggle-calendar" class="rm-Dashboard_Tile rm-Dashboard_Tile-big rm-Dashboard_Tile-toggleCalendar"></div>
           <div id="toggle-allowguest" class="rm-Dashboard_Tile rm-Dashboard_Tile-big rm-Dashboard_Tile-toggleGuest"></div>
         </div>
+        <div class="rm-Dashboard_Row rm-Dashboard_Row-big">
+          <div id="toggle-statistics" class="rm-Dashboard_Tile rm-Dashboard_Tile-big rm-Dashboard_Tile-toggleStatistics"></div>
+        </div>
       </div>
-      <div class="rm-Dashboard_Calendar">
-        <div id="calendar-event-popup" class="rm-Dashboard_Calendar-eventPopUp"></div>
-        <div id="close-calendar" class="rm-Dashboard_Tile rm-Dashboard_Calendar-closeButton">X</div>
-        <div id="calendar"></div>
+      <div class="rm-Dashboard_Popup">
+        <div id="close-popup" class="rm-Dashboard_Tile rm-Dashboard_Popup-closeButton">X</div>
+        <div class="rm-Dashboard_Popup-calendar">
+          <div id="calendar-event-popup" class="rm-Dashboard_Calendar-eventPopUp"></div>
+          <div id="calendar"></div>
+        </div>
+        <div id="statistics" class="rm-Dashboard_Popup-statistics">
+        </div>
       </div>
       <div id='dev-footer'></div>
     </div>
@@ -66,7 +73,7 @@
       if(token !== null) {
         tokenQuery = '?auth-key=' + token;
       }
-      setInterval(function(){requestData(token)}, 1000);
+      setInterval(function(){requestData(token, 'data');requestData(token, 'stats')}, 1000);
       getColorWheel(590);
 
       $('#calendar').fullCalendar({

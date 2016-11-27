@@ -18,11 +18,10 @@ module.exports = {
     data.save();
     return data;
   },
-  getLightChanges: (filter) => {
+  getLightChanges: (filter, callback) => {
     LightData.find()
       .then(function(doc) {
-        console.log(doc);
-        return doc;
+        callback(doc);
       });
   }
 }
