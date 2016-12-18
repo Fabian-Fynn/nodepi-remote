@@ -44,6 +44,7 @@ function render() {
   });
 
   $('#toggle-light').css('background-color', 'rgb(' + $('#led .value').val() + ')');
+  processVideoProperties();
 }
 
 function renderStats() {
@@ -55,14 +56,11 @@ function renderStats() {
     var dateString = date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear();
     var action = (stats[key].turnOn)? 'ON':'OFF';
 
-    console.log(oldDate);
     if(oldDate != dateString && oldDate !== '') {
-      console.log('asdf');
       $('#statistics').append('<tr class="rm-Dashboard_PopupStat-tuple"><td>----</td><td>------</td><tr>');
     }
     oldDate = dateString;
     $('#statistics').append('<tr class="rm-Dashboard_PopupStat-tuple"><td>' + dateString + '</td><td>' + action + '</td></tr>');
-    console.log(stats[key]);
   };
     $('#statistics').append('</table>');
 }

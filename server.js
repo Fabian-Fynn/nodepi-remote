@@ -32,6 +32,15 @@ app.get('/remote', function(req, res) {
   }
 });
 
+app.get('/mood', function(req, res) {
+  requestLatestCommit(res);
+  if(authenticated(req.query['auth-key'])) {
+    res.sendFile(path.join(__dirname + '/public/mood.html'));
+  } else {
+    res.sendFile(path.join(__dirname + '/public/unauthorized.html'));
+  }
+});
+
 app.get('/guest-remote', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/guest-remote.html'));
 });

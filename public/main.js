@@ -136,9 +136,9 @@ function saveProperties() {
         value = null;
       }
 
-      if( typeof value === 'string') {
-        value = value.toLowerCase();
-      }
+      //if( typeof value === 'string') {
+      //  value = value.toLowerCase();
+      //}
 
       if( value === 'true' ) {
         value = true;
@@ -261,6 +261,6 @@ function requestFullScreen(element) {
   requestData(token, 'data');
   requestData(token, 'stats');
 
-  $('.menu').append('<a href="/' + tokenQuery + '"><div class="logo"></div></a><ul><a href="/guest-remote' + tokenQuery + '"><li>Guest Remote</li></a><a href="/remote' + tokenQuery + '"><li>Remote Control</li></a><a href="/set' + tokenQuery + '"><li>Set Properties</li></a></ul>');
+  $('.menu').append('<a href="/' + tokenQuery + '"><div class="logo"></div></a><ul><a href="/guest-remote' + tokenQuery + '"><li>Guest Remote</li></a><a href="/remote' + tokenQuery + '"><li>Remote Control</li></a><a href="/mood' + tokenQuery + '"><li>Mood Display</li></a><a href="/set' + tokenQuery + '"><li>Set Properties</li></a></ul>');
 })();
 
