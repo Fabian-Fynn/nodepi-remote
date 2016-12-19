@@ -41,6 +41,7 @@ function initialize(){
 
 function playerStateChanged(state) {
   if(state.data === 0){
+    player.playVideo();
   }
 };
 
