@@ -35,13 +35,24 @@
   @media (min-width: 1020px) {
     .rm-Dashboard_Row {
       width: 100%;
-      float: none; } }
+      float: right; } }
 
 .rm-Dashboard_Row-right {
   text-align: right; }
 
 .rm-Dashboard_Row-big {
-  height: 110px; }
+  height: 110px;
+  width: 252px; }
+
+.rm-Dashboard_Row-column {
+  width: 48%;
+  float: right; }
+
+.rm-Dashboard_Row-column .rm-Dashboard_Tile-small {
+  margin-bottom: 5px; }
+
+.rm-Dashboard_Row-column:last-child {
+  float: left; }
 
 .rm-Dashboard_Tile {
   position: relative;
@@ -50,7 +61,6 @@
   height: 50px;
   background: #333;
   border: 1px solid #fff;
-  margin-right: 6px;
   cursor: pointer;
   transition: all .2s ease-in-out;
   background-size: 70%;
@@ -63,8 +73,8 @@
 
   .rm-Dashboard_Tile-small:hover {
     transform: scale(1.2); } }
-.rm-Dashboard_Tile-small:nth-child(even) {
-  margin-right: 30px; }
+.rm-Dashboard_Tile-small:nth-child(odd) {
+  margin-right: 6px; }
 
 .rm-Dashboard_Tile:last-child, .rm-Dashboard_Tile-big:last-Child {
   margin-right: 0; }
@@ -115,6 +125,18 @@
   background-image: url("../assets/stats.svg");
   background-size: 65%; }
   .rm-Dashboard_Tile-toggleStatistics.active {
+    background-color: #5E5E5E; }
+
+.rm-Dashboard_Tile-toggleFire {
+  background-image: url("../assets/fire.svg");
+  background-size: 65%; }
+  .rm-Dashboard_Tile-toggleFire.active {
+    background-color: #5E5E5E; }
+
+.rm-Dashboard_Tile-toggleBeach {
+  background-image: url("../assets/palm.svg");
+  background-size: 65%; }
+  .rm-Dashboard_Tile-toggleBeach.active {
     background-color: #5E5E5E; }
 
 .rm-Dashboard-ColorWheel {

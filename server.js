@@ -133,7 +133,13 @@ function saveProperties(stateFile, req, res) {
       } else if(obj.properties.light === false) {
         Logger.logLightChange({on: false, off: true, trigger: 'dashboard'});
       }
-      saveFile(stateFile, obj, res);
+      if (obj.properties.moodchange === true) {
+        handleMoodChanges(obj, function(obje) {
+          saveFile(stateFile, obje, res);
+        });
+      } else {
+        saveFile(stateFile, obj, res);
+      }
     } else if(obj.properties.allowguest === true) {
       for(var i = 0; i < obj.guestProperties.length; i++){
         var key = obj.guestProperties[i];
@@ -157,6 +163,26 @@ function saveProperty(key, value, res) {
   });
 };
 
+function handleMoodChanges(obj, callback) {
+  const props = obj.properties;
+  const mood = props.mood;
+
+  if (mood === false) {
+    props.led = props.ledbackup;
+    props.ledbackup = false;
+    props.currentvideo = false;
+  } else {
+    if (props.ledbackup === false) {
+      props.ledbackup = props.led;
+    }
+    props.led = props[`mood-${mood}-led`];
+    props.currentvideo = props[`mood-${mood}-video`];
+  }
+
+  props.moodchange = false;
+
+  callback(obj);
+};
 
 function saveFile(file, obj, res, respond) {
   jsonfile.writeFile(stateFile, obj, function(err) {

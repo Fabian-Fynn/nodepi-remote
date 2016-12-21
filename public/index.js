@@ -27,7 +27,7 @@ function render() {
     $('#properties').append('<div class="property" id="' + key +'">');
     $('#' + key).append('<input class="key" type="text" disabled="true" value="' + key + '">');
     $('#' + key).append('<input class="value" type="text" disabled="true" value="' + data[key] + '">');
-    if (key === 'maximize' || key === 'light' || key === 'allowguest' || key === 'hidemenu') {
+    if (key === 'maximize' || key === 'light' || key === 'allowguest' || key === 'hidemenu' || key === 'mood') {
       if (data[key] === true) {
         $('#toggle-' + key).addClass('active');
       } else {
@@ -40,11 +40,20 @@ function render() {
           $('.menu').removeClass('closed');
         }
       }
+      if (key === 'mood') {
+        $('.rm-Dashboard_Tile-toggleMood').removeClass('active');
+        if (data[key] !== 'false') {
+          $('#toggle-' + data[key]).addClass('active');
+        }
+      }
     }
   });
 
   $('#toggle-light').css('background-color', 'rgb(' + $('#led .value').val() + ')');
-  processVideoProperties();
+
+  if (player) {
+    processVideoProperties();
+  }
 }
 
 function renderStats() {

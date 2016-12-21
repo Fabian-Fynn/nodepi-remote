@@ -47,7 +47,7 @@ $tile-width-small: 50px;
   float: right;
   @media (min-width: 1020px){
    width: 100%;
-   float: none;
+   float: right;
   }
   height: $tile-width-small;
   margin-bottom: 15px;
@@ -61,6 +61,20 @@ $tile-width-small: 50px;
 
 .rm-Dashboard_Row-big {
  height: $tile-width-big;
+ width: $tile-width-big + $tile-width-big + 21 + 11;
+}
+
+.rm-Dashboard_Row-column {
+    width: 48%;
+    float: right;
+}
+
+.rm-Dashboard_Row-column .rm-Dashboard_Tile-small {
+  margin-bottom: 5px;
+}
+
+.rm-Dashboard_Row-column:last-child {
+  float: left;
 }
 
 .rm-Dashboard_Tile {
@@ -70,7 +84,6 @@ $tile-width-small: 50px;
   height: $tile-width-small;
   background: $tile-bgc-dark;
   border: 1px solid #fff;
-  margin-right: 6px;
   cursor: pointer;
   transition: all .2s ease-in-out;
 
@@ -88,8 +101,9 @@ $tile-width-small: 50px;
     transform: scale(1.2);
   }
 }
-.rm-Dashboard_Tile-small:nth-child(even) {
-  margin-right: 30px;
+
+.rm-Dashboard_Tile-small:nth-child(odd) {
+  margin-right: 6px;
 }
 
 .rm-Dashboard_Tile:last-child, .rm-Dashboard_Tile-big:last-Child {
@@ -160,6 +174,24 @@ $tile-width-small: 50px;
 
 .rm-Dashboard_Tile-toggleStatistics {
   background-image: url('../assets/stats.svg');
+  background-size: 65%;
+
+  &.active {
+    background-color: #5E5E5E;
+  }
+}
+
+.rm-Dashboard_Tile-toggleFire {
+  background-image: url('../assets/fire.svg');
+  background-size: 65%;
+
+  &.active {
+    background-color: #5E5E5E;
+  }
+}
+
+.rm-Dashboard_Tile-toggleBeach {
+  background-image: url('../assets/palm.svg');
   background-size: 65%;
 
   &.active {

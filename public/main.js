@@ -65,6 +65,34 @@ $('#close-statistics').click(function(){
   $('.rm-Dashboard_Popup-statistics').removeClass('active');
 });
 
+$('#toggle-fire').click(function(el){
+  $('.rm-Dashboard_Tile-toggleMood').removeClass('active');
+  if( $('#mood .value').val() === 'fire' ) {
+    $(this).removeClass('active');
+    $('#mood .value').val('false');
+    $('#moodchange .value').val('true');
+  } else if( $('#mood .value').val() !== 'fire') {
+    $(this).addClass('active');
+    $('#mood .value').val('fire');
+    $('#moodchange .value').val('true');
+  }
+  saveProperties();
+});
+
+$('#toggle-beach').click(function(el){
+  $('.rm-Dashboard_Tile-toggleMood').removeClass('active');
+  if( $('#mood .value').val() === 'beach' ) {
+    $(this).removeClass('active');
+    $('#mood .value').val('false');
+    $('#moodchange .value').val('true');
+  } else if( $('#mood .value').val() !== 'beach') {
+    $(this).addClass('active');
+    $('#mood .value').val('beach');
+    $('#moodchange .value').val('true');
+  }
+  saveProperties();
+});
+
  $('.rm-Dashboard').click(function(e){
     if (e.target.id !== '#colorWheelContainer' && $('#colorWheelContainer').hasClass('active')) {
       $('#colorWheelContainer').removeClass('active');
