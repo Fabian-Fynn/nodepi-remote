@@ -14,7 +14,7 @@
       <h1> NodePi Guest Remote </h1>
     <div id='property-wrapper'>
       <h2> LED Color Selector </h2>
-      <div id="colorwheel"></div>
+      <div id="colorWheel"></div>
       <input id="color-input"></input>
       <button id="color-save">Save</button>
       <div style="display: none">
@@ -29,15 +29,8 @@
     <script   src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.min.js"></script>
     <script src="js/utils.js"></script>
     <script src="index.js"></script>
-    <script>
-      (() => {
-        let width = Math.min(window.innerWidth, window.innerHeight);
-        //width = width > 1000 ? width/2.5 : width/1.5;
-        window.cw = Raphael.colorwheel($("#colorwheel"),width/2, 200);
-        window.cw.input($("#color-input")[0]);
-        window.cw.color('000000');
-        window.cw.onchange(updateColor);
-      })();
-    </script>
     <script src="main.js"></script>
+    <script>
+      getColorWheel(590);
+    </script>
 </html>
