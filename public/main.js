@@ -132,6 +132,12 @@ $('#toggle-mute').click(function(el){
   saveProperties();
 });
 
+$('.rm-Dashboard_Tile-preset').click(function(el){
+  var id = $(this).prop('id');
+  $('#led .value').val($('#color-' + id + ' .value').val());
+  saveProperties();
+});
+
  $('.rm-Dashboard').click(function(e){
     if (e.target.id !== '#colorWheelContainer' && $('#colorWheelContainer').hasClass('active')) {
       $('#colorWheelContainer').removeClass('active');

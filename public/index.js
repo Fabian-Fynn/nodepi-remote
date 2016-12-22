@@ -53,6 +53,8 @@ function render() {
           $('#toggle-mute').removeClass('active');
         }
       }
+    } else if (key.includes('color-preset')) {
+      $('#' + key.substring(key.length - 7)).css('background', 'rgb(' + data[key] + ')');
     }
   });
 
