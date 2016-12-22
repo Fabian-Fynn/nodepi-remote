@@ -22,13 +22,12 @@ function render() {
     keys.push(key);
   }
   keys.sort();
-  console.log('keys', keys);
 
   keys.forEach(function(key) {
     $('#properties').append('<div class="property" id="' + key +'">');
     $('#' + key).append('<input class="key" type="text" disabled="true" value="' + key + '">');
     $('#' + key).append('<input class="value" type="text" disabled="true" value="' + data[key] + '">');
-    if (key === 'maximize' || key === 'light' || key === 'allowguest' || key === 'hidemenu' || key === 'mood') {
+    if (key === 'maximize' || key === 'light' || key === 'allowguest' || key === 'hidemenu' || key === 'mood' || key === 'mute') {
       if (data[key] === true) {
         $('#toggle-' + key).addClass('active');
       } else {
@@ -45,6 +44,13 @@ function render() {
         $('.rm-Dashboard_Tile-toggleMood').removeClass('active');
         if (data[key] !== 'false') {
           $('#toggle-' + data[key]).addClass('active');
+        }
+      }
+      if (key === 'mute') {
+        if (data[key] === true) {
+          $('#toggle-mute').addClass('active');
+        } else {
+          $('#toggle-mute').removeClass('active');
         }
       }
     }

@@ -139,6 +139,25 @@
   .rm-Dashboard_Tile-toggleBeach.active {
     background-color: #5E5E5E; }
 
+.rm-Dashboard_Tile-toggleSunset {
+  background-image: url("../assets/sunset.svg");
+  background-size: 65%; }
+  .rm-Dashboard_Tile-toggleSunset.active {
+    background-color: #5E5E5E; }
+
+.rm-Dashboard_Tile-toggleRiver {
+  background-image: url("../assets/river.svg");
+  background-size: 65%; }
+  .rm-Dashboard_Tile-toggleRiver.active {
+    background-color: #5E5E5E; }
+
+.rm-Dashboard_Tile-toggleMute {
+  background-image: url("../assets/sound.svg");
+  background-size: 65%; }
+  .rm-Dashboard_Tile-toggleMute.active {
+    background-image: url("../assets/mute.svg");
+    background-color: #5E5E5E; }
+
 .rm-Dashboard-ColorWheel {
   width: 45vw;
   height: 0 !important;

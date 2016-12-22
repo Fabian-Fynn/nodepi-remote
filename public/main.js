@@ -93,6 +93,45 @@ $('#toggle-beach').click(function(el){
   saveProperties();
 });
 
+$('#toggle-sunset').click(function(el){
+  $('.rm-Dashboard_Tile-toggleMood').removeClass('active');
+  if( $('#mood .value').val() === 'sunset' ) {
+    $(this).removeClass('active');
+    $('#mood .value').val('false');
+    $('#moodchange .value').val('true');
+  } else if( $('#mood .value').val() !== 'sunset') {
+    $(this).addClass('active');
+    $('#mood .value').val('sunset');
+    $('#moodchange .value').val('true');
+  }
+  saveProperties();
+});
+
+$('#toggle-river').click(function(el){
+  $('.rm-Dashboard_Tile-toggleMood').removeClass('active');
+  if( $('#mood .value').val() === 'river' ) {
+    $(this).removeClass('active');
+    $('#mood .value').val('false');
+    $('#moodchange .value').val('true');
+  } else if( $('#mood .value').val() !== 'river') {
+    $(this).addClass('active');
+    $('#mood .value').val('river');
+    $('#moodchange .value').val('true');
+  }
+  saveProperties();
+});
+
+$('#toggle-mute').click(function(el){
+  if( $('#mute .value').val() === 'true' ) {
+    $(this).removeClass('active');
+    $('#mute .value').val('false');
+  } else if( $('#mute .value').val() === 'false') {
+    $(this).addClass('active');
+    $('#mute .value').val('true');
+  }
+  saveProperties();
+});
+
  $('.rm-Dashboard').click(function(e){
     if (e.target.id !== '#colorWheelContainer' && $('#colorWheelContainer').hasClass('active')) {
       $('#colorWheelContainer').removeClass('active');
