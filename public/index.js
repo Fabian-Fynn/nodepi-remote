@@ -22,6 +22,7 @@ function render() {
     keys.push(key);
   }
   keys.sort();
+  console.log('keys', keys);
 
   keys.forEach(function(key) {
     $('#properties').append('<div class="property" id="' + key +'">');

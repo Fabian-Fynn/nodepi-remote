@@ -33,7 +33,10 @@
       if(token !== null) {
         tokenQuery = '?auth-key=' + token;
       }
-      setInterval(function(){requestData(token, 'data');requestData(token, 'stats')}, 1000);
+      setInterval(function(){
+        requestData(token, 'data');
+       // requestData(token, 'stats')
+      }, 1000);
 
       weather({
         element: "weather-widget",
