@@ -1,0 +1,169 @@
+<html style="background: #333" id="fullscreen">
+    <head>
+      <meta name="mobile-web-app-capable" content="yes">
+      <link rel='stylesheet' href='main.css'>
+      <link rel='stylesheet' href='css/dashboard.css'>
+      <link rel='stylesheet' href='css/calendar.css'>
+      <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js" type="text/javascript"></script>
+      <script src="./colorwheel.js" type="text/javascript"></script>
+      <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
+      <link rel="stylesheet" type="text/css" href="http://assets.fabianhoffmann.io/weather-widget/latest/weather.css">
+      <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      </head>
+    <body>
+    <div id="alert" > An error occured</div>
+    <div class="menu"></div>
+    <div class="rm-Dashboard">
+      <div class="rm-Dashboard_Column rm-Dashboard_Column-left">
+      </div>
+      <div class="rm-Dashboard_Column rm-Dashboard_Column-center">
+        <div id="weather-widget"></div>
+      </div>
+      <div class="rm-Dashboard_Column rm-Dashboard_Column-right">
+        <div class="rm-Dashboard_Row rm-Dashboard_Row-right">
+          <div id="toggle-hidemenu" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-toggleNav"></div>
+          <div id="toggle-maximize" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-toggleFullscreen"></div>
+        </div>
+        <div class="rm-Dashboard_Row rm-Dashboard_Row-big">
+          <div id="toggle-light" class="rm-Dashboard_Tile rm-Dashboard_Tile-big rm-Dashboard_Tile-toggleLight"></div>
+          <div id="toggle-colorPicker" class="rm-Dashboard_Tile rm-Dashboard_Tile-big rm-Dashboard_Tile-toggleColorWheel"></div>
+        </div>
+        <div class="rm-Dashboard_Row rm-Dashboard_Row-big">
+          <div id="toggle-calendar" class="rm-Dashboard_Tile rm-Dashboard_Tile-big rm-Dashboard_Tile-toggleCalendar"></div>
+          <div id="toggle-allowguest" class="rm-Dashboard_Tile rm-Dashboard_Tile-big rm-Dashboard_Tile-toggleGuest"></div>
+        </div>
+        <!--<div class="rm-Dashboard_Row rm-Dashboard_Row-big">
+          <div id="toggle-statistics" class="rm-Dashboard_Tile rm-Dashboard_Tile-big rm-Dashboard_Tile-toggleStatistics"></div>
+        </div>-->
+        <div class="rm-Dashboard_Row rm-Dashboard_Row-big">
+          <div class="rm-Dashboard_Row-column">
+            <div id="toggle-fire" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-toggleFire rm-Dashboard_Tile-toggleMood"></div>
+            <div id="toggle-beach" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-toggleBeach rm-Dashboard_Tile-toggleMood"></div>
+            <div id="toggle-sunset" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-toggleSunset rm-Dashboard_Tile-toggleMood"></div>
+            <div id="toggle-river" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-toggleRiver rm-Dashboard_Tile-toggleMood"></div>
+          </div>
+          <div class="rm-Dashboard_Row-column">
+            <div id="toggle-mute" class="rm-Dashboard_Tile rm-Dashboard_Tile-big rm-Dashboard_Tile-toggleMute"></div>
+          </div>
+        </div>
+        <div class="rm-Dashboard_Row rm-Dashboard_Row-big">
+          <div class="rm-Dashboard_Row-column">
+            <div id="preset1" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-preset"></div>
+            <div id="preset2" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-preset"></div>
+            <div id="preset3" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-preset"></div>
+            <div id="preset4" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-preset"></div>
+          </div>
+          <div class="rm-Dashboard_Row-column">
+            <div id="preset5" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-preset"></div>
+            <div id="preset6" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-preset"></div>
+            <div id="preset7" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-preset"></div>
+            <div id="preset8" class="rm-Dashboard_Tile rm-Dashboard_Tile-small rm-Dashboard_Tile-preset"></div>
+          </div>
+        </div>
+      </div>
+      <div class="rm-Dashboard_Popup">
+        <div id="close-popup" class="rm-Dashboard_Tile rm-Dashboard_Popup-closeButton">X</div>
+        <div class="rm-Dashboard_Popup-calendar">
+          <div id="calendar-event-popup" class="rm-Dashboard_Calendar-eventPopUp"></div>
+          <div id="calendar"></div>
+        </div>
+        <div id="statistics" class="rm-Dashboard_Popup-statistics">
+        </div>
+      </div>
+      <div id='dev-footer'></div>
+    </div>
+      <div id="colorWheelContainer" class="rm-Dashboard-ColorWheel">
+        <div id="colorWheel"></div>
+        <input id="color-input"></input>
+      </div>
+    <div id='properties' class='index' style="display: none">
+    </div>
+    </body>
+    <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
+    <script   src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.6.1/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js" type="text/javascript"></script>
+    <script src="http://assets.fabianhoffmann.io/weather-widget/latest/weather.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="main.js"></script>
+    <script src="index.js"></script>
+
+    <script>
+
+      var token = getParameterByName('auth-key');
+      var tokenQuery = '';
+
+      if(token !== null) {
+        tokenQuery = '?auth-key=' + token;
+      }
+      setInterval(function(){requestData(token, 'data');requestData(token, 'stats')}, 1000);
+      getColorWheel(590);
+
+      $('#calendar').fullCalendar({
+        weekends: false,
+        defaultView: 'agendaWeek',
+        events: '/events',
+        minTime: "08:00",
+        maxTime: "19:30",
+        height: 550,
+        nowIndicator: true,
+        allDaySlot: false,
+        timeFormat: 'HH:mm',
+        views: {
+          agenda: {
+            titleFormat:  "D MMM"
+          }
+        },
+        eventRender: function(event, element) {
+          element.attr("location", event.location);
+          $(element).find('.fc-content').append('<div class="fc-location">' + event.location + '</div>');
+        },
+        eventBackgroundColor: "rgb(" + localStorage.getItem('led') + ")",
+        eventTextColor: localStorage.getItem('colr'),
+        eventClick: function(event) {
+          var startH = event.start._pf.parsedDateParts[3];
+          startH = (startH < 10) ? ("0" + startH) : startH;
+          var startM = event.start._pf.parsedDateParts[4];
+          startM = (startM < 10) ? ("0" + startM) : startM;
+          var start = startH + ':' + startM;
+
+          var endH = event.end._pf.parsedDateParts[3];
+          endH = (endH < 10) ? ("0" + endH) : endH;
+          var endM = event.end._pf.parsedDateParts[4];
+          endM = (endM < 10) ? ("0" + endM) : endM;
+          var start = startH + ':' + startM;
+          var end = endH + ':' + endM;
+
+          $('#calendar-event-popup').html('<div class="rm-Dashboard_Calendar-eventPopUpDate">' + start + '-' + end + '</div><div class="rm-Dashboard_Calendar-eventPopUpTitle">' + event.title + '</div><div class="rm-Dashboard_Calendar-eventPopUpLocation">' + event.location + '</div>');
+
+          $('#calendar-event-popup').css('background-color', "rgb(" + localStorage.getItem('led') + ")");
+          $('#calendar-event-popup').css('color', localStorage.getItem('colr'));
+          var $title = $('#calendar-event-popup .rm-Dashboard_Calendar-eventPopUpTitle');
+          //$('#calendar-event-popup').height(80 + $title.height() + 'px');
+          $('.rm-Dashboard_Calendar').children().hide();
+          $('#calendar-event-popup').show();
+          $('#calendar-event-popup').click(function(){
+            $('.rm-Dashboard_Calendar').children().show();
+            $('#calendar-event-popup').hide();
+          });
+        }
+      });
+
+      weather({
+        element: "weather-widget",
+        units: "metric",
+        language: "de",
+        scheme: "dark",
+        tempRange: false,
+        conditionName: false,
+        geolocationButton: false,
+        editCityButton: false,
+        clock: true,
+        refreshTimeout: 2,
+        refreshIndicator: false
+      });
+
+    </script>
+</html>

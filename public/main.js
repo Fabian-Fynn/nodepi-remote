@@ -1,34 +1,34 @@
 var data;
 var stats;
 
-$('#save-properties').click(function(){
+$('#save-properties').click(function () {
   saveProperties();
 });
 
-$('#toggle-hidemenu').click(function(el){
+$('#toggle-hidemenu').click(function (el) {
   $(this).toggleClass('active');
   $('.menu').toggleClass('closed');
-  if( $('#hidemenu .value').val() !== 'false' ) {
+  if ($('#hidemenu .value').val() !== 'false') {
     $('#hidemenu .value').val('false');
-  } else if( $('#hidemenu .value').val() === 'false') {
+  } else if ($('#hidemenu .value').val() === 'false') {
     $('#hidemenu .value').val('true');
   }
   saveProperties();
 });
 
-$('#toggle-light').click(function(el){
+$('#toggle-light').click(function (el) {
   $(this).toggleClass('active');
-    $(this).css('background-color', 'rgb(' + $('#led .value').val() + ')');
-    if( $('#light .value').val() !== "false" ) {
-      $('#light .value').val("false");
-    } else if( $('#light .value').val() === "false" ) {
-      $('#light .value').val("true");
-    }
-    saveProperties();
+  $(this).css('background-color', 'rgb(' + $('#led .value').val() + ')');
+  if ($('#light .value').val() !== "false") {
+    $('#light .value').val("false");
+  } else if ($('#light .value').val() === "false") {
+    $('#light .value').val("true");
+  }
+  saveProperties();
 });
 
-$('#toggle-maximize').click(function(){
-  if( $(this).hasClass('active') ) {
+$('#toggle-maximize').click(function () {
+  if ($(this).hasClass('active')) {
     location.reload();
   } else {
     $(this).addClass('active');
@@ -37,41 +37,41 @@ $('#toggle-maximize').click(function(){
   }
 });
 
-$('#toggle-colorPicker').click(function(ev){
+$('#toggle-colorPicker').click(function (ev) {
   ev.stopPropagation();
   $('#colorWheelContainer').toggleClass('active');
 });
 
-$('#toggle-calendar').click(function(){
+$('#toggle-calendar').click(function () {
   $('.rm-Dashboard_Popup').addClass('active');
   $('.rm-Dashboard_Popup-calendar').addClass('active');
   $('.rm-Dashboard_Popup-calendar').show();
 });
 
-$('#close-popup').click(function(){
+$('#close-popup').click(function () {
   $('.rm-Dashboard_Popup').removeClass('active');
   $('.rm-Dashboard_Popup-calendar').hide();
   $('.rm-Dashboard_Popup-statistics').hide();
 });
 
-$('#toggle-statistics').click(function(){
+$('#toggle-statistics').click(function () {
   $('.rm-Dashboard_Popup').addClass('active');
   $('.rm-Dashboard_Popup-calendar').hide();
   $('.rm-Dashboard_Popup-statistics').show();
 });
 
-$('#close-statistics').click(function(){
+$('#close-statistics').click(function () {
   $('.rm-Dashboard_Popup').removeClass('active');
   $('.rm-Dashboard_Popup-statistics').removeClass('active');
 });
 
-$('#toggle-fire').click(function(el){
+$('#toggle-fire').click(function (el) {
   $('.rm-Dashboard_Tile-toggleMood').removeClass('active');
-  if( $('#mood .value').val() === 'fire' ) {
+  if ($('#mood .value').val() === 'fire') {
     $(this).removeClass('active');
     $('#mood .value').val('false');
     $('#moodchange .value').val('true');
-  } else if( $('#mood .value').val() !== 'fire') {
+  } else if ($('#mood .value').val() !== 'fire') {
     $(this).addClass('active');
     $('#mood .value').val('fire');
     $('#moodchange .value').val('true');
@@ -79,13 +79,13 @@ $('#toggle-fire').click(function(el){
   saveProperties();
 });
 
-$('#toggle-beach').click(function(el){
+$('#toggle-beach').click(function (el) {
   $('.rm-Dashboard_Tile-toggleMood').removeClass('active');
-  if( $('#mood .value').val() === 'beach' ) {
+  if ($('#mood .value').val() === 'beach') {
     $(this).removeClass('active');
     $('#mood .value').val('false');
     $('#moodchange .value').val('true');
-  } else if( $('#mood .value').val() !== 'beach') {
+  } else if ($('#mood .value').val() !== 'beach') {
     $(this).addClass('active');
     $('#mood .value').val('beach');
     $('#moodchange .value').val('true');
@@ -93,13 +93,13 @@ $('#toggle-beach').click(function(el){
   saveProperties();
 });
 
-$('#toggle-sunset').click(function(el){
+$('#toggle-sunset').click(function (el) {
   $('.rm-Dashboard_Tile-toggleMood').removeClass('active');
-  if( $('#mood .value').val() === 'sunset' ) {
+  if ($('#mood .value').val() === 'sunset') {
     $(this).removeClass('active');
     $('#mood .value').val('false');
     $('#moodchange .value').val('true');
-  } else if( $('#mood .value').val() !== 'sunset') {
+  } else if ($('#mood .value').val() !== 'sunset') {
     $(this).addClass('active');
     $('#mood .value').val('sunset');
     $('#moodchange .value').val('true');
@@ -107,13 +107,13 @@ $('#toggle-sunset').click(function(el){
   saveProperties();
 });
 
-$('#toggle-river').click(function(el){
+$('#toggle-river').click(function (el) {
   $('.rm-Dashboard_Tile-toggleMood').removeClass('active');
-  if( $('#mood .value').val() === 'river' ) {
+  if ($('#mood .value').val() === 'river') {
     $(this).removeClass('active');
     $('#mood .value').val('false');
     $('#moodchange .value').val('true');
-  } else if( $('#mood .value').val() !== 'river') {
+  } else if ($('#mood .value').val() !== 'river') {
     $(this).addClass('active');
     $('#mood .value').val('river');
     $('#moodchange .value').val('true');
@@ -121,38 +121,38 @@ $('#toggle-river').click(function(el){
   saveProperties();
 });
 
-$('#toggle-mute').click(function(el){
-  if( $('#mute .value').val() === 'true' ) {
+$('#toggle-mute').click(function (el) {
+  if ($('#mute .value').val() === 'true') {
     $(this).removeClass('active');
     $('#mute .value').val('false');
-  } else if( $('#mute .value').val() === 'false') {
+  } else if ($('#mute .value').val() === 'false') {
     $(this).addClass('active');
     $('#mute .value').val('true');
   }
   saveProperties();
 });
 
-$('.rm-Dashboard_Tile-preset').click(function(el){
+$('.rm-Dashboard_Tile-preset').click(function (el) {
   var id = $(this).prop('id');
   $('#led .value').val($('#color-' + id + ' .value').val());
   saveProperties();
 });
 
- $('.rm-Dashboard').click(function(e){
-    if (e.target.id !== '#colorWheelContainer' && $('#colorWheelContainer').hasClass('active')) {
-      $('#colorWheelContainer').removeClass('active');
-    }
- });
+$('.rm-Dashboard').click(function (e) {
+  if (e.target.id !== '#colorWheelContainer' && $('#colorWheelContainer').hasClass('active')) {
+    $('#colorWheelContainer').removeClass('active');
+  }
+});
 
-$('#color-input').change(function(){
+$('#color-input').change(function () {
   saveProperties();
 });
 
-$('#toggle-allowguest').click(function(){
-  if( $('#allowguest .value').val() !== "false" ) {
+$('#toggle-allowguest').click(function () {
+  if ($('#allowguest .value').val() !== "false") {
     $('#allowguest .value').val("false");
     $(this).removeClass('active');
-  } else if( $('#allowguest .value').val() === "false" ) {
+  } else if ($('#allowguest .value').val() === "false") {
     $('#allowguest .value').val("true");
     $(this).addClass('active');
   }
@@ -160,7 +160,7 @@ $('#toggle-allowguest').click(function(){
 });
 
 function addProperty() {
-  if( $('#new-property .key').val() !== '') {
+  if ($('#new-property .key').val() !== '') {
     $('#new-property .key').attr('disabled', true);
     var newKey = $('#new-property .key').val();
     $('#new-property').attr('id', newKey);
@@ -172,11 +172,11 @@ function addProperty() {
     $('#new-property').append('<button class="true"> 1 </button>');
     $('#new-property').append('<button class="remove-btn"> X </button>');
 
-    $('.remove-btn').click(function(e){
+    $('.remove-btn').click(function (e) {
       removeProperty(e.target.parentElement.id);
     });
 
-    $('.false, .true').click(function(e){
+    $('.false, .true').click(function (e) {
       $('#' + e.target.parentElement.id + ' .value').val(e.target.className);
     });
   }
@@ -184,7 +184,7 @@ function addProperty() {
 
 function removeProperty(key) {
   var result = confirm('Do you really want to remove the property ' + key + '?');
-  if(result === true) {
+  if (result === true) {
     delete data[key];
     $('#' + key).remove();
   }
@@ -193,19 +193,19 @@ function removeProperty(key) {
 function saveProperties() {
   var token = getParameterByName('auth-key');
   var newData = {};
-  $('.property').each(function(index){
+  $('.property').each(function (index) {
     var key, value;
 
-    $.each($(this)[0].children, function(idx){
-      if( $(this).is('.key') ) {
+    $.each($(this)[0].children, function (idx) {
+      if ($(this).is('.key')) {
         key = $(this).val();
-      } else if( $(this).is('.value') ) {
+      } else if ($(this).is('.value')) {
         value = $(this).val();
       }
     });
 
-    if( key !== '' && key !== undefined) {
-      if( value === '' || value === undefined) {
+    if (key !== '' && key !== undefined) {
+      if (value === '' || value === undefined) {
         value = null;
       }
 
@@ -213,13 +213,13 @@ function saveProperties() {
       //  value = value.toLowerCase();
       //}
 
-      if( value === 'true' ) {
+      if (value === 'true') {
         value = true;
       } else if (value === 'false') {
         value = false;
       }
 
-      if( typeof key === 'string') {
+      if (typeof key === 'string') {
         key = key.toLowerCase();
       }
 
@@ -236,32 +236,32 @@ function saveProperties() {
     type: "POST",
     url: "/API/set?auth-key=" + token,
     // The key needs to match your method's input parameter (case-sensitive).
-   data: JSON.stringify(data),
-   contentType: "application/json; charset=utf-8",
-   dataType: "json",
-   success: function(data){
-     //showAlert('success', 'Saved.');
-   },
-   failure: function(errMsg) {
-     showAlert('error', errMsg);
-   },
-   error: function(err) {
-    showAlert('error', err.responseText);
-     setTimeout(function(){
-      location.reload();
-     }, 2000);
-   }
- });
+    data: JSON.stringify(data),
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function (data) {
+      //showAlert('success', 'Saved.');
+    },
+    failure: function (errMsg) {
+      showAlert('error', errMsg);
+    },
+    error: function (err) {
+      showAlert('error', err.responseText);
+      setTimeout(function () {
+        location.reload();
+      }, 2000);
+    }
+  });
 }
 
-function showAlert(type, msg){
-  if(type === 'hidden') {
+function showAlert(type, msg) {
+  if (type === 'hidden') {
     $('#alert').removeClass();
   } else {
     $('#alert').addClass(type);
     $('#alert').html(msg);
 
-    setTimeout(function(){
+    setTimeout(function () {
       showAlert('hidden');
     }, 5000);
   }
@@ -278,21 +278,21 @@ function getParameterByName(name) {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-function requestData(token, req){
+function requestData(token, req) {
   var xhttp = new XMLHttpRequest();
 
-  xhttp.onreadystatechange = function() {
+  xhttp.onreadystatechange = function () {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
       var dat;
-      if(xhttp.responseText !== '') {
+      if (xhttp.responseText !== '') {
         dat = JSON.parse(xhttp.responseText);
       } else {
         dat = {};
       }
-      if(req === 'data'){
+      if (req === 'data') {
         data = dat;
         render();
-      } else if(req === 'stats') {
+      } else if (req === 'stats') {
         stats = dat;
         renderStats();
       }
@@ -300,9 +300,9 @@ function requestData(token, req){
   };
 
   var url;
-  if(req === 'data'){
+  if (req === 'data') {
     url = "/API/data?auth-key=" + token;
-  } else if(req === 'stats') {
+  } else if (req === 'stats') {
     url = "/API/statistics?auth-key=" + token;
   }
   xhttp.open("GET", url, true);
@@ -314,20 +314,20 @@ function requestFullScreen(element) {
   var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
 
   if (requestMethod) { // Native full screen.
-      requestMethod.call(element);
+    requestMethod.call(element);
   } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
-      var wscript = new ActiveXObject("WScript.Shell");
-      if (wscript !== null) {
-          wscript.SendKeys("{F11}");
-      }
+    var wscript = new ActiveXObject("WScript.Shell");
+    if (wscript !== null) {
+      wscript.SendKeys("{F11}");
+    }
   }
 }
 
-(function(){
+(function () {
   var token = getParameterByName('auth-key');
   var tokenQuery = '';
 
-  if(token !== null) {
+  if (token !== null) {
     tokenQuery = '?auth-key=' + token;
   }
 
