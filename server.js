@@ -8,18 +8,11 @@ var stateFile = 'data.json';
 var bodyParser = require('body-parser');
 var secrets = require('./config/secrets.js');
 var Logger = require('./logger.js');
-const subscribe = require('./subscribe');
 
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 let events;
-
-subscribe.requestCalendar((ics) => { events = ics; });
-
-setInterval(() => {
-  subscribe.requestCalendar((ics) => { events = ics; });
-}, 1000 * 3600 * 5);
 
 app.use(express.static('public'));
 app.get('/', function (req, res) {
